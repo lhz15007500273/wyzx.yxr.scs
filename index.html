@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="五邑臻选,严选,五邑优选,五邑甄选,五邑优品,五邑精选,甄选家,严选态度" />
+  <meta name="description" content="五邑臻选秉承五邑一贯的严谨态度，深入世界各地，严格把关所有商品的产地、工艺、原材料、饮食等各类商品，力求给你最优质的商品。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五邑臻选 - 以严谨的态度，为消费者甄选优品</title>
+  <link rel="shortcut icon" href="./images/logo2.png" type="image/x-icon" />
+  <!-- 公共样式CSS -->
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- 首页样式 -->
+  <link rel="stylesheet" href="./css/index.css">
+<!-- 在页面顶部引入 jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 然后再引入你自己的 JavaScript 文件 -->
+<script src="js/index.js"></script>
+
+</head>
+<style>
+.fixed {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 30px;
+}
+
+.fixed ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fixed li {
+  margin: 10px 0;
+}
+
+.fixed li a {
+  display: block;
+  padding: 10px 20px;
+  background-color: rgb(255, 255, 255); /* 默认背景色 */
+  color: black;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.fixed li a.active {
+  background-color: rgb(180, 160, 120); /* 激活时的背景色 */
+}
+
+.lh1 {
+  display: flex;  /* 使用 flexbox 水平排列 */
+  align-items: center; /* 垂直居中对齐 */
+  justify-content: space-between; /* 两端对齐，标题和链接分开 */
+  gap: 20px; /* 添加间隙 */
+}
+
+.horizontal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px; /* 列表项之间的间隔 */
+}
+
+.horizontal-list li {
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-list a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold; /* 文字加粗 */
+}
+
+.rh1 {
+  margin-left: auto; /* 将“更多推荐”推到右边 */
+}
+
+.rh1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.carouselImgCon ul {
+  position: relative;
+}
+
+.prev, .next {
+  position: absolute;
+  z-index: 10;
+}
+
+
+
+
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./images/bj.png');
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* 弹窗背景 */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+/* 弹窗内容 */
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* 地址列表 */
+#address-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.address-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.address-item input {
+    margin-right: 10px;
+}
+
+.address-item button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* 修改已添加的地址标题的字体颜色为黑色 */
+label {
+    color: black;
+}
+
+/* 表单的布局样式 */
+form {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* 每个表单元素都分行显示 */
+form label, form input, form textarea, form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    width: auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 地址列表项的样式 */
+.address-item input {
+    margin-right: 10px;
+}
+
+
+</style>
+<body>
+  <!-- 头部  公共的 -->
+  <header id="header">
+    <!-- 头,顶部 start -->
+    <div class="header">
+      <div class="center">
+        <div class="left">
+          <a href="./announcement.html">
+            因事件（台风、特大暴雨）影响，部分地区无法配送公告
+          </a>
+        </div>
+       
+        <div class="right">
+          <ul>
+
+              <li id="isLogin">
+                <!-- 登录状态将在此处动态显示 -->
+              </li>
+ 
+          
+            
+                
+            <li><a href="./order.html" target="order">我的订单</a></li>
+            <li><a href="./vip.html" target="vip">会员</a></li>
+            <li class="dropMeun">
+  
+                <li><a href="javascript:void(0)" onclick="openAddressPopup()">收货信息</a></li>
+            
+
+    <!-- 弹窗 -->
+    <div id="address-popup" class="popup">
+      <div class="popup-content">
+          <span class="close-btn" onclick="closeAddressPopup()">&times;</span>
+          <h3>填写收货信息</h3>
+          
+          <!-- 填写地址表单 -->
+          <form id="address-form">
+              <label for="name">姓名：</label>
+              <input type="text" id="name" name="name" required>
+              
+              <label for="phone">手机号码：</label>
+              <input type="tel" id="phone" name="phone" required>
+              
+              <label for="address">详细地址：</label>
+              <textarea id="address" name="address" required></textarea>
+              
+              <button type="submit">添加地址</button>
+          </form>
+
+          <hr>
+          <h3>已添加的地址：</h3>
+          <ul id="address-list">
+              <!-- 动态生成地址列表 -->
+          </ul>
+      </div>
+  </div>
+            </li>
+            <li class="dropMeun">
+              <a  class="iconfont">客户服务</a>
+              <ul>
+                <li><a href="javascript:void(0)" id="openChatLink">在线客服</a></li>
+                <li><a href="./cooperation.html">商务合作</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+   <!-- 客服聊天框 -->
+   <div id="chatbox" class="chatbox">
+    <div class="chatbox-header">
+        <h4>在线客服</h4>
+        <button id="closeChat" class="close-chat-btn">×</button>
+    </div>
+    <div id="chatbox-messages" class="chatbox-messages">
+        <!-- 消息内容 -->
+    </div>
+    <div class="chatbox-input">
+        <input type="text" id="userMessage" placeholder="请输入您的问题..." />
+        <button id="sendMessage" class="send-btn">发送</button>
+    </div>
+  </div>
+  
+      <style>/* 客服聊天框样式 */
+        .chatbox {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none; /* 初始状态隐藏 */
+            flex-direction: column;
+        }
+        
+        .chatbox-header {
+            background-color: #0e578b;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbox-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .chatbox-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .chatbox-input input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        
+        .chatbox-input button {
+            background-color: #0e578b;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .chatbox-input button:hover {
+            background-color: #467393;
+        }
+        
+        .close-chat-btn {
+            background: none;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+  
+        /* 消息样式 */
+  .chatbox .message {
+      margin-bottom: 10px;
+  }
+  
+  .chatbox .message strong {
+      color: #0e578b;
+  }
+  
+  .chatbox .message:nth-child(odd) {
+      background-color: #f0f8ff;
+      padding: 5px;
+      border-radius: 5px;
+  }
+  
+  .chatbox .message:nth-child(even) {
+      background-color: #e5e5e5;
+      padding: 5px;
+      border-radius: 5px;
+  }
+  
+  /* 用户消息 */
+  .chatbox .message:first-child {
+      text-align: left;
+  }
+  
+  /* 客服消息 */
+  .chatbox .message:last-child {
+      text-align: right;
+  }
+  
+        </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const chatbox = document.getElementById('chatbox');
+      const closeChat = document.getElementById('closeChat');
+      const sendMessageBtn = document.getElementById('sendMessage');
+      const userMessageInput = document.getElementById('userMessage');
+      const chatboxMessages = document.getElementById('chatbox-messages');
+      const openChatLink = document.getElementById('openChatLink');  // 获取"在线客服"链接
+    
+      // 打开聊天框
+      function openChatbox() {
+        chatbox.style.display = 'flex';
+      }
+    
+      // 关闭聊天框
+      closeChat.addEventListener('click', function () {
+        chatbox.style.display = 'none';
+      });
+    
+      // 发送消息
+      sendMessageBtn.addEventListener('click', function () {
+        const userMessage = userMessageInput.value.trim();
+        if (userMessage) {
+          // 显示用户的消息
+          addMessageToChatbox('用户', userMessage);
+    
+          // 清空输入框
+          userMessageInput.value = '';
+    
+          // 模拟客服回复
+          simulateCustomerServiceReply(userMessage);
+        }
+      });
+    
+      // 向聊天框中添加消息
+      function addMessageToChatbox(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatboxMessages.appendChild(messageElement);
+    
+        // 自动滚动到底部
+        chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+      }
+    
+      // 模拟客服回复的函数
+      function simulateCustomerServiceReply(userMessage) {
+        let fixedReply = ''; // 默认的客服回复
+    
+        // 根据用户输入的内容做不同的判断
+        if (userMessage.includes('你好') || userMessage.includes('您好')) {
+          fixedReply = '您好！欢迎来到五邑臻选。有什么我可以帮助您的吗？';
+        } else if (userMessage.includes('商品') || userMessage.includes('价格')) {
+          fixedReply = '您可以通过我们的产品分类来查看所有商品，或者直接告诉我您想要的商品名称。';
+        } else if (userMessage.includes('退货') || userMessage.includes('退款')) {
+          fixedReply = '如果您需要退货或退款，请提供订单号，我会帮您处理。';
+        } else if (userMessage.includes('物流') || userMessage.includes('快递')) {
+          fixedReply = '请提供您的订单号，我会帮您查询物流信息。';
+        } else if (userMessage.includes('优惠') || userMessage.includes('折扣')) {
+          fixedReply = '我们目前有一些促销活动，您可以查看“限时折扣”板块，享受优惠价格。';
+        } else {
+          fixedReply = '您好！感谢您的提问。我们已经收到您的问题，会尽快处理。';
+        }
+    
+        // 模拟客服回复（延迟1秒）
+        setTimeout(function () {
+          addMessageToChatbox('客服', fixedReply);
+        }, 1000);
+      }
+    
+      // 点击"在线客服"链接时打开聊天框
+      openChatLink.addEventListener('click', function () {
+        openChatbox();
+      });
+    });
+    </script>
+    <!-- 头,顶部 end -->
+    <!-- 头, 搜索区域 start -->
+    <div class="search">
+      <div class="center">
+        <div class="logo">
+          <a href="#">五邑臻选</a>
+        </div>
+        <div class="search-btn">
+          <div class="top">
+            <input type="text" autocomplete="off" maxlength="100">
+            <span>搜索</span>
+            <i></i>
+          </div>
+          <div class="bottom">
+            <a href="#">台山咸虾酱</a>
+            <a href="#">广合腐乳</a>
+          </div>
+          <ul class="search-ret">
+          </ul>
+        </div>
+        <!-- <div class="cart"> -->
+          <a class="cart" href="./cart.html">
+            <i class="gwc"></i>
+            <span class="text">购物车</span>
+          </a>
+          <a class="collect" href="./collect.html">
+            <i class="gwc"></i>
+            <span class="text">收藏</span>
+            <!-- <i class="circle">0</i> -->
+          </a>
+      
+      </div>
+    </div>
+  
+    <!-- 头, 搜索区域  end-->
+
+    <!-- 头, nav区域 start-->
+    <ul class="nav center">
+      <li><a href="./index.html" class="current">首页</a></li>
+      <li><a href="./buy好物.html">好物精选</a></li>
+      <li class="header_ul">
+        <a href="./buy特色.html">特色产品</a>
+        <ul class="bb_ul">
+          <li><a href="./buy开平.html">开平精选</a></li>
+          <li><a href="./buy鹤山.html">鹤山优选</a></li>
+          <li><a href="./buy恩平.html">恩平严选</a></li>
+          <li><a href="./buy台山.html">台山正宗</a></li>
+          <li><a href="./buy新会.html">新会特产</a></li>
+        </ul>
+      </li>
+      <li><a href="./buy文创.html">文创精品</a></li>
+      <li><a href="./buy推荐.html">为你推荐</a></li>
+    </ul>
+<!-- 头, nav区域 end-->
+
+  </header>
+
+<!-- 内容区域 m-newProducts -->
+<div class="m-newProducts">
+  <div class="center">
+    <div class="m-commonHeader">
+      <div class="f-left">
+        <a href="#">
+          <h3 class="h_title">新品首发</h3>
+        </a>
+        <small class="fs-14">为你寻觅世间好物</small>
+      </div>
+      <div class="f-right">
+        <a href="#" class="fs-14">更多新品 ></a>
+      </div>
+    </div>
+
+    <div class="slickWidth">
+      <div class="box">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <a href="#"><img src="./images/轮播4.png" alt="图片4"></a>
+            <a href="#"><img src="./images/轮播3.png" alt="图片3"></a>
+            <a href="#"><img src="./images/轮播2.png" alt="图片2"></a>
+            <a href="#"><img src="./images/轮播1.png" alt="图片1"></a>
+          </div>
+        
+          <!-- 上一张 下一张 -->
+          <div class="swiper-button">
+            <button class="prev"></button>
+            <button class="next"></button>
+          </div>
+        
+          <!-- 分页器 -->
+          <ul class="swiper-pagination">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- 人气推荐 -->
+<div class="m-indexPopularItem">
+  <div class="center">
+    <div class="m-commonHeader">
+      <div class="lh1">
+        <h3 class="h_title">人气推荐</h3>
+        <ul>
+          <li><a href="#" class="fs-14">编辑推荐</a></li>
+          <li><a href="#" class="fs-14">热销总榜</a></li>
+        </ul>
+      </div>
+      <div class="rh1">
+        <a href="#" class="fs-14">更多推荐 ></a>
+      </div>
+    </div>
+    <div class="showContainer">
+      <div class="box1">
+        <div class="popularItem">
+          <a href="./特色.台山.三牙.html"target="三牙"> <!-- 包裹整个商品项，点击跳转 -->   
+            <div class="hd">
+              <img src="./images/三牙.png" alt="" class="img_scale">
+              <span class="logo_title">台山正宗</span>
+            </div>
+            <div class="bd">
+              <h4 class="name">广海三牙咸鱼</h4>
+              <p>¥29.8</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="box2">
+        <div class="popularItem">
+          <a href="./广合腐乳.html"> <!-- 包裹整个商品项，点击跳转 -->
+            <div class="hd">
+              <img src="./images/广合腐乳.png" alt="" class="img_scale">
+              <span class="logo_title">开平精选</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">广合腐乳微辣腐乳300g 白腐乳300g 红方原汁原味纯芝麻油味300g</h4>
+              <p class="price">¥12.8</p>
+            </div>
+          </a>
+        </div>
+        <div class="popularItem">
+          <a href="商品详情页3.html">
+            <div class="hd">
+              <img src="./images/咸虾.png" alt="" class="img_scale">
+              <span class="logo_title">台山正宗</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">台山咸虾酱</h4>
+              <p class="price">¥25.8</p>
+            </div>
+          </a>
+        </div>
+        <div class="popularItem">
+          <a href="商品详情页4.html">
+            <div class="hd">
+              <img src="./images/文创帆布袋.png" alt="" class="img_scale">
+              <span class="logo_title">好货推荐</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">侨都三区四市特色插画文创帆布袋</h4>
+              <p class="price">¥18.8</p>
+            </div>
+          </a>
+        </div>
+        <div class="popularItem">
+          <a href="商品详情页5.html">
+            <div class="hd">
+              <img src="./images/杜阮凉瓜.png" alt="" class="img_scale">
+              <span class="logo_title">新会特产</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">杜阮凉瓜</h4>
+              <p class="price">¥18.8</p>
+            </div>
+          </a>
+        </div>
+        <div class="popularItem">
+          <a href="商品详情页6.html">
+            <div class="hd">
+              <img src="./images/文创挂件.png" alt="" class="img_scale">
+              <span class="logo_title">好货推荐</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">江门非遗Q版挂件</h4>
+              <p class="price">¥8.8</p>
+            </div>
+          </a>
+        </div>
+        <div class="popularItem">
+          <a href="商品详情页7.html">
+            <div class="hd">
+              <img src="./images/陈皮.png" alt="" class="img_scale">
+              <span class="logo_title">新会特产</span>
+            </div>
+            <div class="bd">
+              <h4 class="name fs14">新会陈皮</h4>
+              <p class="price">¥58.8</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- 文创精品 -->
+  <div class="m-creativeItems">
+    <div class="center">
+      <div class="m-commonHeader">
+        <div class="lh1">
+          <h3 class="h_title">文创精品</h3>
+          <ul class="horizontal-list">
+            <li><a href="#" class="fs-14">好物精选</a><b>/</b></li>
+            <li><a href="#" class="fs-14">学习用具</a><b>/</b></li>
+            <li><a href="#" class="fs-14">精美挂件</a><b>/</b></li>
+            <li><a href="#" class="fs-14">创意摆件</a><b>/</b></li>
+            <li><a href="#" class="fs-14">日常用品</a><b>/</b></li>
+          </ul>
+          <div class="rh1">
+            <a href="#" class="fs-14">更多推荐 ></a>
+          </div>
+        </div>
+        
+      <div class="banner">
+        <img src="./images/文创精品.png" alt="" style="width: 100%; height: 100%; object-fit: contain;">
+
+      </div>
+      <div class="slickWidth">
+        <div class="box">
+          <ul>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/钥匙扣1.png" src="" alt="">
+                  <img src="./images/钥匙扣2.png" src="" alt="">
+                  <span class="logo_title">热卖好货</span>
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">碉楼钥匙扣</a></h4>
+                <div class="price">
+                  <span class="price-new">¥16.9</span>
+                  <span class="price-old">¥19.9</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/陈皮食谱画框.png" src="" alt="">
+                  <img src="./images/画框2.png" src="" alt="">
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">陈皮食谱画框</a></h4>
+                <div class="price">
+                  <span class="price-new">¥19.9</span>
+                  <span class="price-old">¥25.9</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/赤坎文创折扇.png" src="" alt="">
+                  <img src="./images/折扇2.png" src="" alt="">
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">赤坎文创折扇</a></h4>
+                <div class="price">
+                  <span class="price-new">¥15.9</span>
+                  <span class="price-old">¥19.9</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/新会文创日历.png" src="" alt="">
+                  <img src="./images/新会日历2.png" src="" alt="">
+
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">新会文创日历2025年新版</a></h4>
+                <div class="price">
+                  <span class="price-new">¥28.8</span>
+                  <span class="price-old">¥32.9</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 特色产品 -->
+  <div class="m-featuredProducts">
+    <div class="center">
+      <div class="m-commonHeader">
+        <div class="lh1">
+          <h3 class="h_title">特色产品</h3>
+          <ul class="horizontal-list">
+            <li><a href="#" class="fs-14">开平精选</a><b>/</b></li>
+            <li><a href="#" class="fs-14">鹤山优选</a><b>/</b></li>
+            <li><a href="#" class="fs-14">恩平严选</a><b>/</b></li>
+            <li><a href="#" class="fs-14">台山正宗</a><b>/</b></li>
+            <li><a href="#" class="fs-14">新会特产</a><b>/</b></li>
+          </ul>
+          <div class="rh1">
+            <a href="#" class="fs-14">更多推荐 ></a>
+          </div>
+        </div>
+   
+              <div class="banner">
+        
+      <div class="banner">
+        <img src="./images/特色产品.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+
+      </div>
+      <div class="slickWidth">
+        <div class="box">
+          <ul>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/开平黑蒜.png" src="" alt="">
+                  <img src="./images/黑蒜2.png" src="" alt="">
+                  <span class="logo_title">开平精选</span>
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">开平黑蒜.</a></h4>
+                <div class="price">
+                  <span class="price-new">¥14.9</span>
+                  <span class="price-old">¥17.8</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/鹤山牛史饼.png" src="" alt="">
+                  <img src="./images/正宗双合联香牛史饼2.png" src="" alt="">
+                  <span class="logo_title">鹤山优选</span>
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">鹤山正宗双合联香牛史饼</a></h4>
+                <div class="price">
+                  <span class="price-new">¥30.9</span>
+                  <span class="price-old">¥32.9</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/恩平簕菜茶.png" src="" alt="">
+                  <img src="./images/簕菜茶2.png" src="" alt="">
+                  <span class="logo_title">恩平严选</span>
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">恩平簕菜茶</a></h4>
+                <div class="price">
+                  <span class="price-new">35.5</span>
+                  <span class="price-old">¥48.2</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hd">
+                <a href="#">
+                  <img src="./images/台山腊肠.png" src="" alt="">
+                  <img src="./images/腊肠2.png" src="" alt="">
+                  <span class="logo_title">台山正宗</span>
+                </a>
+              </div>
+              <div class="bd">
+                <div class="prdtTags">
+                  <span>特价</span>
+                </div>
+                <h4 class="name"><a href="#" class="fs-14">台山腊肠</a></h4>
+                <div class="price">
+                  <span class="price-new">¥39.9</span>
+                  <span class="price-old">¥49.9</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <div class="reviews">
+    <div class="center">
+      <div class="m-commonHeader">
+        <div class="lh1">
+          <h3 class="h_title">大家都在说</h3>
+          <small class="fs-14">生活没有统一标准</small>
+        </div>
+      </div>
+      <div class="slickWidth" id="say">
+        <div class="carouselImgCon">
+          <ul>
+            <!-- 图片列表 -->
+            <li>
+              <a href="#">
+                <img src="./images/评论。腐乳.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>广合腐乳微辣腐乳300g</span><span>¥29.9</span></p>
+                <p>好吃，拿来做腐乳鸡煲味道很好。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论.咸马.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>台山咸虾酱</span><span>¥19.7</span></p>
+                <p>很香 味道浓郁鲜美醇香，使用完后会再光顾。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论.陈皮.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>八年新会陈皮蕴月瓶礼盒8年陈皮干250克</span><span>¥498</span></p>
+                <p>新鲜度：非常新鲜，口感醇厚，包装不漏气。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论.濑粉.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>马冈濑粉</span><span>¥35.8</span></p>
+                <p>韧度好，口感不错。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论咸鱼.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>去头三牙鱼干</span><span>¥28.89</span></p>
+                <p>很干身，比较咸。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论花生.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>鹤山陈皮花生</span><span>¥12.6</span></p>
+                <p>花生脆香，好吃。</p>
+              </div>
+            </li>
+            <li>
+              <a href="#">
+                <img src="./images/评论烧饼.png" class="img_scale" alt="">
+              </a>
+              <div>
+                <p><span class="user">m****5</span><span class="date">2024-06-16 23:17</span></p>
+                <p><span>恩平特色特产清明节烧饼</span><span>¥25</span></p>
+                <p>正宗恩平烧饼，软糯好吃，芝麻香。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- 底部 -->
+  <footer>
+    <div class="center">
+      <div class="yx-cp-m-ft1">
+        <div class="yx-cp-item">
+          <h4>客服服务</h4>
+          <div class="btn">
+            <a>
+              <i></i>
+              <span>在线客服</span>
+            </a>
+            <a>
+              <i></i>
+              <span>用户反馈</span>
+            </a>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>何为五邑臻选</h4>
+          <p>
+            五邑臻选”通常指的是来自中国广东省珠江三角洲五邑地区的特色优质产品。这些产品经过严格筛选，代表了五邑地区的特色和优势。
+            五邑地区包括 江门市 及其周边的五个主要区域：新会、台山 、 开平、恩平和鹤山，这个区域有着丰富的文化和自然资源，生产了许多在广东乃至全国都具有知名度的特色产品
+          </p>
+          <div class="ewm">
+            <span>关注我们 :</span>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>关注微信公众号“五邑臻选”</h4>
+          <div><a><img src="./images/二维码.png" alt="" style="width: 150px; height: auto;"></a></div>
+          <p>每日最新资讯</p>
+      </div>
+      
+      
+      </div>
+      <div class="yx-cp-m-ft2"></div>
+    </div>
+  </footer>
+<!-- 导航栏 -->
+<div class="fixed">
+  <ul>
+      <li><a href="javascript:void(0);" onclick="goToNewProducts()" id="newProducts">新品首发</a></li>
+      <li><a href="javascript:void(0);" onclick="goToPopularItems()" id="popularItems">人气推荐</a></li>
+      <li><a href="javascript:void(0);" onclick="goToCreativeItems()" id="creativeItems">文创精品</a></li>
+      <li><a href="javascript:void(0);" onclick="goToFeaturedProducts()" id="featuredProducts">特色产品</a></li>
+      <li><a href="javascript:void(0);" onclick="goToReviews()" id="reviews">都在说</a></li>
+      <li><a href="javascript:void(0);" onclick="goToTop()" id="goTop">回到顶部</a></li>
+    </ul>
+
+</div>
+
+
+
+  <script src="./js/index.js"></script>
+  <script src="./js/common.js"></script>
+
+  
+  <script>
+    // 页面跳转到指定部分
+
+// 页面跳转到指定部分
+function goToNewProducts() {
+    window.scrollTo({ top: document.querySelector('.m-newProducts').offsetTop, behavior: 'smooth' });
+    updateActiveLink('newProducts');
+}
+
+function goToPopularItems() {
+    window.scrollTo({ top: document.querySelector('.m-indexPopularItem').offsetTop, behavior: 'smooth' });
+    updateActiveLink('popularItems');
+}
+
+function goToCreativeItems() {
+    window.scrollTo({ top: document.querySelector('.m-creativeItems').offsetTop, behavior: 'smooth' });
+    updateActiveLink('creativeItems');
+}
+
+function goToFeaturedProducts() {
+    window.scrollTo({ top: document.querySelector('.m-featuredProducts').offsetTop, behavior: 'smooth' });
+    updateActiveLink('featuredProducts');
+}
+
+function goToReviews() {
+    window.scrollTo({ top: document.querySelector('.reviews').offsetTop, behavior: 'smooth' });
+    updateActiveLink('reviews');
+}
+
+function goToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateActiveLink('goTop');
+}
+
+// 更新当前活动菜单项
+function updateActiveLink(currentSection) {
+    // 获取所有菜单项并移除active类
+    const menuItems = document.querySelectorAll('.fixed a');
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // 如果当前项是回到顶部，跳过不添加active类
+    if (currentSection === 'goTop') return;
+
+    // 根据传入的当前楼层标识，添加active类
+    const currentItem = document.querySelector(`#${currentSection}`);
+    if (currentItem) {
+        currentItem.classList.add('active');
+    }
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 获取必要的 DOM 元素
+  const carouselImgCon = document.querySelector(".carouselImgCon ul");
+
+  const slides = Array.from(carouselImgCon.children); // 获取所有图片的列表
+  const totalItems = slides.length - 2; // 去掉克隆的图片，实际的图片数量是总长度减去克隆的图片
+
+  let currentIndex = 0;
+  let autoPlayInterval;
+
+  // 克隆第一个和最后一个图片，形成循环
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[totalItems - 1].cloneNode(true);
+
+  carouselImgCon.appendChild(firstClone); // 把克隆的第一个图片添加到末尾
+  carouselImgCon.insertBefore(lastClone, slides[0]); // 把克隆的最后一个图片添加到开头
+
+  // 更新轮播容器的宽度
+  carouselImgCon.style.width = (totalItems + 2) * 364 + "px"; // 总数加上克隆的两个图片
+
+  // 切换图片的函数
+  function goToSlide(index) {
+    // 如果索引越界，重新调整为第一个或最后一个
+    if (index < 0) {
+      currentIndex = totalItems - 1; // 如果当前为第一个，跳转到倒数第二个
+      carouselImgCon.style.transition = "none"; // 禁用动画
+      carouselImgCon.style.transform = "translateX(" + (-currentIndex * 364) + "px)"; // 移动到倒数第二张
+      setTimeout(() => {
+        carouselImgCon.style.transition = "transform 0.5s ease"; // 启用动画
+        carouselImgCon.style.transform = "translateX(" + (-currentIndex * 364) + "px)"; // 正常动画过渡
+      }, 0);
+    } else if (index >= totalItems) {
+      currentIndex = 0; // 如果当前为最后一个，跳转到第一张
+      carouselImgCon.style.transition = "none"; // 禁用动画
+      carouselImgCon.style.transform = "translateX(0)"; // 重置位置到最左
+      setTimeout(() => {
+        carouselImgCon.style.transition = "transform 0.5s ease"; // 启用动画
+        carouselImgCon.style.transform = "translateX(" + (-currentIndex * 364) + "px)"; // 正常动画过渡
+      }, 0);
+    } else {
+      currentIndex = index; // 正常更新索引
+    }
+
+    // 更新偏移位置
+    carouselImgCon.style.transform = "translateX(" + (-currentIndex * 364) + "px)"; // 364px 是每个图片的宽度 + 间距
+  }
+
+  // 自动播放
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(function () {
+      goToSlide(currentIndex + 1); // 每次切换1张
+    }, 3000); // 每3秒切换一次
+  }
+
+  // 启动自动播放
+  startAutoPlay();
+
+  // 鼠标悬停时停止自动播放，离开时重新开始
+  carouselImgCon.addEventListener("mouseenter", function () {
+    clearInterval(autoPlayInterval); // 清除自动播放
+  });
+
+  carouselImgCon.addEventListener("mouseleave", function () {
+    startAutoPlay(); // 重新启动自动播放
+  });
+
+  // 初始化时展示第一张
+  goToSlide(0);
+});
+
+</script>
+
+
+
+      
+      <script>
+        // 打开收货地址弹窗
+        function openAddressPopup() {
+            document.getElementById("address-popup").style.display = "block";
+        }
+        
+        // 关闭收货地址弹窗
+        function closeAddressPopup() {
+            document.getElementById("address-popup").style.display = "none";
+        }
+        
+        // 处理地址表单提交
+        document.getElementById("address-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // 获取表单数据
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            
+            // 创建地址对象
+            const newAddress = {
+                name: name,
+                phone: phone,
+                address: address
+            };
+            
+            // 获取当前保存的地址列表
+            let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+            
+            // 将新地址添加到地址列表中
+            addressList.push(newAddress);
+            
+            // 更新 localStorage
+            localStorage.setItem("addresses", JSON.stringify(addressList));
+            
+            // 渲染地址列表
+            renderAddressList();
+            
+            // 清空表单
+            document.getElementById("address-form").reset();
+        });
+        
+        // 渲染地址列表
+        function renderAddressList() {
+            const addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+            const addressListContainer = document.getElementById("address-list");
+            addressListContainer.innerHTML = "";  // 清空当前列表
+            
+            addressList.forEach((address, index) => {
+                const listItem = document.createElement("li");
+                listItem.classList.add("address-item");
+                listItem.innerHTML = `
+                    <label>
+                        <input type="radio" name="default-address"> ${address.name} (${address.phone}) - ${address.address}
+                    </label>
+                    <button onclick="deleteAddress(${index})">删除</button>
+                `;
+                
+                addressListContainer.appendChild(listItem);
+            });
+        }
+        
+        // 删除地址
+        function deleteAddress(index) {
+            // 获取当前保存的地址列表
+            let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+            
+            // 删除指定索引的地址
+            addressList.splice(index, 1);
+            
+            // 更新 localStorage
+            localStorage.setItem("addresses", JSON.stringify(addressList));
+            
+            // 渲染更新后的地址列表
+            renderAddressList();
+        }
+        
+        // 页面加载时加载存储的地址列表
+        window.onload = function() {
+            renderAddressList();
+        };
+        
+            </script>
+</body>
+
+</html>

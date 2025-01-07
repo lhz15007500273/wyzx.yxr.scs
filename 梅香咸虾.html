@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="五邑臻选,严选,五邑优选,五邑甄选,五邑优品,五邑精选,甄选家,严选态度" />
+  <meta name="description" content="五邑臻选秉承五邑一贯的严谨态度，深入世界各地，严格把关所有商品的产地、工艺、原材料、饮食等各类商品，力求给你最优质的商品。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五邑臻选 - 以严谨的态度，为中国消费者甄选天下优品</title>
+  <link rel="shortcut icon" href="./images/logo2.png" type="image/x-icon" />
+  <!-- 公共样式CSS -->
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- 首页样式 -->
+  <link rel="stylesheet" href="./css/detail.css">
+</head>
+<style>
+
+/* 二级菜单样式 */
+#dropdownMenu {
+    display: none;              /* 初始时隐藏 */
+    position: absolute;         /* 相对定位 */
+    top: 30px;                  /* 菜单距离顶部的间距 */
+    left: 0;                    /* 菜单与链接左对齐 */
+    background-color: #fff;     /* 菜单背景 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    padding: 10px 0;
+    min-width: 150px;           /* 设置菜单宽度 */
+    border-radius: 8px;         /* 圆角效果 */
+    z-index: 10;                /* 确保菜单显示在上层 */
+    opacity: 0;                 /* 初始状态为透明 */
+    visibility: hidden;         /* 初始状态为隐藏 */
+    transition: opacity 0.3s, visibility 0s linear 0.3s; /* 平滑显示与隐藏 */
+}
+
+/* 菜单项的样式 */
+#dropdownMenu a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+#dropdownMenu a:hover {
+    background-color: #f0f0f0; /* 悬停时改变背景色 */
+}
+
+/* 显示时的样式 */
+#dropdownMenu.show {
+    opacity: 1;                 /* 显示时完全不透明 */
+    visibility: visible;        /* 显示时可见 */
+    transition: opacity 0.3s, visibility 0s; /* 过渡效果 */
+}
+
+/* 确保包含链接的父元素（isLogin）有相对定位，以便二级菜单显示在其下方 */
+#isLogin {
+    position: relative;
+}
+
+
+#header {
+  height: 183px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 0px solid #e8e8e8;
+}
+/* 小容器样式 */
+.small {
+  width: 100%; /* 容器宽度 */
+  padding: 10px; /* 内边距 */
+  box-sizing: border-box;
+}
+
+.small ul {
+  display: flex;          /* 使用 flexbox 来排列子元素 */
+  justify-content: space-between;  /* 设置均匀分布 */
+  padding: 0;
+  margin: 0;
+  list-style: none;       /* 去掉列表项默认的标记 */
+}
+
+.small ul li {
+  flex: 1;                /* 每个列表项占据相等的宽度 */
+  padding: 0 5px;         /* 给每个图片之间加一些间距 */
+}
+
+.small ul li img {
+  width: 100%;            /* 图片宽度适应其容器 */
+  height: auto;           /* 保持图片的原始比例 */
+  display: block;         /* 去掉图片下方的空白 */
+  object-fit: cover;      /* 图片裁剪以适应容器 */
+  margin-top: 0px;        /* 设置图片顶部的间距 */
+  margin-bottom: 20px;    /* 设置图片底部的间距 */
+  transition: transform 0.3s ease-in-out; /* 平滑过渡效果 */
+}
+
+/* 鼠标悬浮时放大图片 */
+.small ul li img:hover {
+  transform: scale(1.2);   /* 鼠标悬浮时放大图片至1.2倍 */
+}
+
+ul li {
+  color: rgb(223, 223, 223);         /* 设置字体颜色为黑色 */
+  font-size: 14px;      /* 设置字体大小 */
+  font-family: Arial, sans-serif; /* 设置字体样式 */
+}
+
+ul span {
+  color: rgb(9, 9, 9);         /* 设置字体颜色为黑色 */
+  font-size: 13px;      /* 设置字体大小 */
+  font-family: Arial, sans-serif; /* 设置字体样式 */
+}
+/* 图片容器的样式 */
+.img {
+  width: 100%;          /* 容器宽度设置为 100%，让它填充父元素 */
+  padding: 10px 0;      /* 可以适当为容器设置上下内边距 */
+  box-sizing: border-box; /* 确保 padding 不会影响元素的实际尺寸 */
+}
+
+/* 使图片适应容器 */
+.img p {
+  margin: 0;            /* 去掉图片段落标签的默认 margin */
+}
+
+.img img {
+  width: 100%;          /* 图片宽度适应容器 */
+  height: auto;         /* 保持图片的原始比例 */
+  display: block;       /* 去掉图片下方的空白 */
+}
+
+.specProp {
+    font-size: 16px;  /* 设置规格标题字体大小 */
+    color: #333;  /* 设置规格标题字体颜色 */
+    margin-bottom: 10px;  /* 设置底部间距 */
+}
+
+.specProp .fz {
+    font-size: 18px;  /* 设置规格标题的字体大小 */
+    color: #000;  /* 设置规格标题的字体颜色 */
+    font-weight: bold;  /* 设置规格标题的字体加粗 */
+}
+
+.specProp ul {
+    list-style-type: none;  /* 移除列表前的圆点 */
+    padding: 0;  /* 移除内边距 */
+    margin: 0;  /* 移除外边距 */
+}
+
+.specProp .spec-item {
+    font-size: 12px;  /* 设置每一项规格的字体大小 */
+    color: #666;  /* 设置每一项规格的字体颜色 */
+    padding: 5px 0;  /* 设置上下内边距 */
+    cursor: pointer;  /* 鼠标悬停时显示手型 */
+    transition: color 0.3s;  /* 平滑过渡效果 */
+}
+
+.specProp .spec-item:hover {
+    color: #b4a078;  /* 设置鼠标悬停时字体颜色 */
+}
+
+/* 选中时改变字体颜色 */
+.specProp .spec-item.selected {
+    color: #b4a078; /* 改变选中时的颜色 */
+    font-weight: bold; /* 可选，增加加粗效果 */
+}
+
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./images/bj.png');
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* 弹窗背景 */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+/* 弹窗内容 */
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* 地址列表 */
+#address-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.address-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.address-item input {
+    margin-right: 10px;
+}
+
+.address-item button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* 修改已添加的地址标题的字体颜色为黑色 */
+label {
+    color: black;
+}
+
+/* 表单的布局样式 */
+form {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* 每个表单元素都分行显示 */
+form label, form input, form textarea, form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    width: auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 地址列表项的样式 */
+.address-item input {
+    margin-right: 10px;
+}
+
+/* 评论区样式 */
+/* 调整评论区容器 */
+.comments-section {
+    margin: 0 auto; /* 使容器水平居中 */
+    padding: 30px;  /* 设置合适的内边距 */
+    width: 70%;      /* 设置宽度，您可以根据需求调整 */
+    max-width: 1200px; /* 设置最大宽度，避免过大 */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 添加阴影让容器更立体 */
+}
+
+/* 移动容器的位置 */
+.comments-section {
+    position: relative; /* 启用相对定位，允许使用top, right, bottom, left */
+    top: -100px;         /* 向上移动30px */
+    left: 0%;          /* 向右移动容器，距离左侧10% */
+}
+
+/* 适应移动的评论区 */
+.comments-section header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 评论列表的样式 */
+.comments-list {
+    margin-top: 20px;
+}
+
+
+.comments-section header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.comments-list .comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.user-info {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.username {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.comment-time {
+    color: #999;
+    font-size: 12px;
+}
+
+.comment-content {
+    font-size: 14px;
+    color: #333;
+}
+
+.comment-images img {
+    max-width: 100px;
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+</style>
+<body>
+  <header id="header">
+      <!-- 头部  公共的 -->
+  <header id="header">
+    <!-- 头,顶部 start -->
+    <div class="header">
+      <div class="center">
+        <div class="left">
+          <a href="./announcement.html">
+            因事件（台风、特大暴雨）影响，部分地区无法配送公告
+          </a>
+        </div>
+        <div class="right">
+          <ul>
+            <li id="isLogin">
+              <!-- 登录状态将在此处动态显示 -->
+            </li>
+         
+            <li><a href="./order.html" target="order">我的订单</a></li>
+            <li><a href="./vip.html" target="vip">会员</a></li>
+            <li><a href="javascript:void(0)" onclick="openAddressPopup()">收货信息</a></li>
+             <!-- 弹窗 -->
+    <div id="address-popup" class="popup">
+      <div class="popup-content">
+          <span class="close-btn" onclick="closeAddressPopup()">&times;</span>
+          <h3>填写收货信息</h3>
+          
+          <!-- 填写地址表单 -->
+          <form id="address-form">
+              <label for="name">姓名：</label>
+              <input type="text" id="name" name="name" required>
+              
+              <label for="phone">手机号码：</label>
+              <input type="tel" id="phone" name="phone" required>
+              
+              <label for="address">详细地址：</label>
+              <textarea id="address" name="address" required></textarea>
+              
+              <button type="submit">添加地址</button>
+          </form>
+
+          <hr>
+          <h3>已添加的地址：</h3>
+          <ul id="address-list">
+              <!-- 动态生成地址列表 -->
+          </ul>
+      </div>
+  </div>
+            <li class="dropMeun">
+              <a href="javascript:void(0)" class="iconfont">客户服务</a>
+              <ul>
+                <li><a href="javascript:void(0)" id="openChatLink">在线客服</a></li>
+                <li><a href="./cooperation.html">商务合作</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+     <!-- 客服聊天框 -->
+   <div id="chatbox" class="chatbox">
+    <div class="chatbox-header">
+        <h4>在线客服</h4>
+        <button id="closeChat" class="close-chat-btn">×</button>
+    </div>
+    <div id="chatbox-messages" class="chatbox-messages">
+        <!-- 消息内容 -->
+    </div>
+    <div class="chatbox-input">
+        <input type="text" id="userMessage" placeholder="请输入您的问题..." />
+        <button id="sendMessage" class="send-btn">发送</button>
+    </div>
+  </div>
+    <style>/* 客服聊天框样式 */
+      .chatbox {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          width: 300px;
+          height: 400px;
+          border: 1px solid #ccc;
+          background-color: white;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          display: none; /* 初始状态隐藏 */
+          flex-direction: column;
+      }
+      
+      .chatbox-header {
+          background-color: #0e578b;
+          color: white;
+          padding: 10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+      
+      .chatbox-messages {
+          flex: 1;
+          padding: 10px;
+          overflow-y: auto;
+          font-size: 14px;
+          border-bottom: 1px solid #ccc;
+      }
+      
+      .chatbox-input {
+          display: flex;
+          padding: 10px;
+          border-top: 1px solid #ccc;
+      }
+      
+      .chatbox-input input {
+          flex: 1;
+          padding: 8px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          font-size: 14px;
+      }
+      
+      .chatbox-input button {
+          background-color: #0e578b;
+          color: white;
+          border: none;
+          padding: 10px;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      
+      .chatbox-input button:hover {
+          background-color: #467393;
+      }
+      
+      .close-chat-btn {
+          background: none;
+          color: white;
+          border: none;
+          font-size: 18px;
+          cursor: pointer;
+      }
+
+      /* 消息样式 */
+.chatbox .message {
+    margin-bottom: 10px;
+}
+
+.chatbox .message strong {
+    color: #0e578b;
+}
+
+.chatbox .message:nth-child(odd) {
+    background-color: #f0f8ff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.chatbox .message:nth-child(even) {
+    background-color: #e5e5e5;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* 用户消息 */
+.chatbox .message:first-child {
+    text-align: left;
+}
+
+/* 客服消息 */
+.chatbox .message:last-child {
+    text-align: right;
+}
+
+      </style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const chatbox = document.getElementById('chatbox');
+    const closeChat = document.getElementById('closeChat');
+    const sendMessageBtn = document.getElementById('sendMessage');
+    const userMessageInput = document.getElementById('userMessage');
+    const chatboxMessages = document.getElementById('chatbox-messages');
+    const openChatLink = document.getElementById('openChatLink');  // 获取"在线客服"链接
+  
+    // 打开聊天框
+    function openChatbox() {
+      chatbox.style.display = 'flex';
+    }
+  
+    // 关闭聊天框
+    closeChat.addEventListener('click', function () {
+      chatbox.style.display = 'none';
+    });
+  
+    // 发送消息
+    sendMessageBtn.addEventListener('click', function () {
+      const userMessage = userMessageInput.value.trim();
+      if (userMessage) {
+        // 显示用户的消息
+        addMessageToChatbox('用户', userMessage);
+  
+        // 清空输入框
+        userMessageInput.value = '';
+  
+        // 模拟客服回复
+        simulateCustomerServiceReply(userMessage);
+      }
+    });
+  
+    // 向聊天框中添加消息
+    function addMessageToChatbox(sender, message) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatboxMessages.appendChild(messageElement);
+  
+      // 自动滚动到底部
+      chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+    }
+  
+    // 模拟客服回复的函数
+    function simulateCustomerServiceReply(userMessage) {
+      let fixedReply = ''; // 默认的客服回复
+  
+      // 根据用户输入的内容做不同的判断
+      if (userMessage.includes('你好') || userMessage.includes('您好')) {
+        fixedReply = '您好！欢迎来到五邑臻选。有什么我可以帮助您的吗？';
+      } else if (userMessage.includes('商品') || userMessage.includes('价格')) {
+        fixedReply = '您可以通过我们的产品分类来查看所有商品，或者直接告诉我您想要的商品名称。';
+      } else if (userMessage.includes('退货') || userMessage.includes('退款')) {
+        fixedReply = '如果您需要退货或退款，请提供订单号，我会帮您处理。';
+      } else if (userMessage.includes('物流') || userMessage.includes('快递')) {
+        fixedReply = '请提供您的订单号，我会帮您查询物流信息。';
+      } else if (userMessage.includes('优惠') || userMessage.includes('折扣')) {
+        fixedReply = '我们目前有一些促销活动，您可以查看“限时折扣”板块，享受优惠价格。';
+      } else {
+        fixedReply = '您好！感谢您的提问。我们已经收到您的问题，会尽快处理。';
+      }
+  
+      // 模拟客服回复（延迟1秒）
+      setTimeout(function () {
+        addMessageToChatbox('客服', fixedReply);
+      }, 1000);
+    }
+  
+    // 点击"在线客服"链接时打开聊天框
+    openChatLink.addEventListener('click', function () {
+      openChatbox();
+    });
+  });
+  </script>
+    <!-- 头,顶部 end -->
+
+    <!-- 头, 搜索区域 start -->
+    <div class="search">
+      <div class="center">
+        <div class="logo">
+          <a href="#">五邑臻选</a>
+        </div>
+        <div class="search-btn">
+          <div class="top">
+            <input type="text" autocomplete="off" maxlength="100">
+            <span>搜索</span>
+            <i></i>
+          </div>
+          <div class="bottom">
+            <a href="#">台山咸虾酱</a>
+            <a href="#">广合腐乳</a>
+          </div>
+        </div>
+        <a class="cart" href="./cart.html">
+          <i class="gwc"></i>
+          <span class="text">购物车</span>
+          <!-- <i class="circle">0</i> -->
+        </a>
+        <a class="collect" href="./collect.html">
+          <i class="gwc"></i>
+          <span class="text">收藏</span>
+          <!-- <i class="circle">0</i> -->
+        </a>
+
+      </div>
+    </div>
+    <!-- 头, 搜索区域 end -->
+
+<!-- 头, nav区域 start-->
+<ul class="nav center">
+  <li><a href="./index.html" >首页</a></li>
+  <li><a href="./buy好物.html">好物精选</a></li>
+  <li class="header_ul">
+    <a href="./buy特色.html"class="current">特色产品</a>
+    <ul class="bb_ul">
+      <li><a href="./buy开平.html">开平精选</a></li>
+      <li><a href="./buy鹤山.html">鹤山优选</a></li>
+      <li><a href="./buy恩平.html">恩平严选</a></li>
+      <li><a href="./buy台山.html"class="current">台山正宗</a></li>
+      <li><a href="./buy新会.html">新会特产</a></li>
+    </ul>
+  </li>
+  <li><a href="./buy文创.html">文创精品</a></li>
+  <li><a href="./buy推荐.html">为你推荐</a></li>
+  </ul>
+<!-- 头, nav区域 end-->
+
+
+  </header>
+
+  <!-- 商品详情 -->
+  <div class="m-detail">
+    <div class="center">
+
+      <div class="m-crumb">
+    
+        <span>
+          <a href="./buy特色.html">特色产品</a>
+          <i class="iconfont">&#xe621;</i>
+        </span>
+        <span>
+          <a href="./buy台山.html">台山正宗</a>
+        </span>
+   
+      </div>
+
+      <div class="detailHD">
+        <div class="m-slide">
+          <!-- 放大镜 -->
+          <div id="zoom">
+            <div class="big">
+              <img src="./images/商品详情/热2.png" alt="">
+            </div>
+            <div class="middle">
+              <img src="./images/商品详情/热2.png" alt="">
+              <div class="mask"></div>
+            </div>
+            <div class="small">
+              <ul>
+                <li><img src="./images/商品详情/梅香咸虾1.png" alt="Image 1"></li>
+                <li><img src="./images/商品详情/梅香咸虾2.png" alt="Image 2"></li>
+                <li><img src="./images/商品详情/梅香咸虾3.png" alt="Image 3"></li>
+                <li><img src="./images/商品详情/梅香咸虾4.png" alt="Image 4"></li>
+              </ul>
+            </div>
+            
+
+          </div>
+        </div>
+        <div class="m-info">
+          <div class="intro">
+            <h2>台山川岛特产手工晒酶香虾酱梅香咸虾咸玛海鲜酱调味料虾膏酱228g</h2>
+            <div class="text">
+              <span>台山正宗 鲜香虾酱 </span>
+        <a href="#comments-section" class="fs-14">查看评价</a>
+              </a>
+            </div>
+
+          </div>
+          <div class="m-limitedPrice">
+            <span class="content">特价</span>
+            <span class="countdown">距优惠结束3天09时09分</span>
+          </div>
+          <div class="price">
+            <div class="flex title">
+              <span class="fz">活动价</span>
+              <span>¥12.8</span>
+              <span>¥26.2</span>
+            </div>
+            <div class="flex canClick">
+              <span class="fz"></span>
+              <span>
+                天天免邮Pro会员立享免邮，到手价12.16
+              </span>
+            </div>
+            <div class="flex sale">
+              <span class="fz">促销</span>
+              <span>打骨折</span>
+            </div>
+            <div class="flex m-feedbackBonus">
+              <span class="fz">购物返</span>
+              <span>最高返2积分</span>
+            </div>
+            <div class="flex pointInfo">
+              <span class="fz">限制</span>
+              <span>特价商品不可与优惠券叠加使用</span>
+            </div>
+            <div class="flex freightText">
+              <span class="fz">邮费</span>
+              <a href="#">满99元免邮</a>
+            </div>
+            <div class="flex delivery">
+              <span class="fz">配送</span>
+              <span>广东江门</span>
+            </div>
+            <hr>
+            <div class="flex policyBox">
+              <span class="fz">服务</span>
+              <a href="#">
+                <span>五邑臻选自营 > </span>
+                <span>不支持无忧退换 > </span>
+                <span>不可用券 > </span>
+                <span>国内部分地区不可配送</span>
+              </a>
+            </div>
+          </div>
+          <div class="specProp">
+            <span class="fz">规格</span>
+            <ul>
+                <li class="spec-item" data-spec="梅香虾酱228g一瓶单买">
+                  梅香虾酱228g一瓶单买
+                </li>
+                <li class="spec-item" data-spec="梅香虾酱（辣）228g一瓶单买">
+                  梅香虾酱（辣）228g一瓶单买
+                </li>
+            </ul>
+        </div>
+        
+          <div class="count">
+            <span class="fz">数量</span>
+            <div class="u-selnum">
+                <span class="sub">-</span>
+                <input type="text" value="1">
+                <span class="sup">+</span>
+            </div>
+        </div>
+          <div class="btn">
+            <a href="javascript:" class="submit" id="buy-now">立即购买</a>
+            <a href="javascript:" class="addCart" id="add-to-cart">加入购物车</a>
+            <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // 获取元素
+    const specItems = document.querySelectorAll('.spec-item');
+    const quantityInput = document.querySelector('.u-selnum input');
+    const quantityMinus = document.querySelector('.sub');
+    const quantityPlus = document.querySelector('.sup');
+    const selectedSpecText = document.getElementById('selected-spec-text');
+
+    // 当前选中的规格和数量
+    let selectedSpec = null;
+    let selectedQuantity = 1;
+
+    // 更新显示的规格
+    function updateSelectedSpec(spec) {
+        selectedSpecText.textContent = spec || '请选择规格';
+    }
+
+    // 更新 localStorage 中的购物车或收藏列表
+    function updateLocalStorage(key, items) {
+        localStorage.setItem(key, JSON.stringify(items));
+    }
+
+    // 获取本地存储的购物车或收藏列表
+    function getLocalStorage(key) {
+        return JSON.parse(localStorage.getItem(key)) || [];
+    }
+
+    // 商品信息构建函数
+    function createProductInfo(spec, quantity) {
+        const orderDate = new Date().toLocaleString(); // 获取下单时间
+        console.log("下单时间：", orderDate);  // 用来检查下单时间
+        return {
+            name: '台山川岛特产手工晒酶香虾酱梅香咸虾咸玛海鲜酱调味料虾膏酱228g',  // 商品名称
+            spec: spec,
+            quantity: quantity,
+            price: 12.8,  // 假设商品的单价
+            image: './images/商品详情/热2.png',  // 商品图片路径
+            orderDate: orderDate  // 下单时间
+        };
+    }
+
+    // 规格选择事件
+    specItems.forEach(item => {
+        item.addEventListener('click', function () {
+            selectedSpec = item.dataset.spec;
+            specItems.forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            updateSelectedSpec(selectedSpec);
+        });
+    });
+
+    // 数量操作
+    quantityPlus.addEventListener('click', function () {
+        selectedQuantity = parseInt(quantityInput.value) + 1;
+        quantityInput.value = selectedQuantity;
+    });
+
+    quantityMinus.addEventListener('click', function () {
+        if (selectedQuantity > 1) {
+            selectedQuantity -= 1;
+            quantityInput.value = selectedQuantity;
+        }
+    });
+
+    // 立即购买
+    document.getElementById('buy-now').addEventListener('click', function () {
+        if (!selectedSpec) {
+            alert('请选择规格');
+            return;
+        }
+
+        const product = createProductInfo(selectedSpec, selectedQuantity);
+
+        // 获取并更新订单
+        let orders = getLocalStorage('order');
+        orders.push(product);
+        updateLocalStorage('order', orders);
+
+        console.log("订单数据：", orders);  // 检查存储的订单数据
+
+        alert('下单成功！');
+    });
+
+    // 加入购物车
+    document.getElementById('add-to-cart').addEventListener('click', function () {
+        if (!selectedSpec) {
+            alert('请选择商品规格');
+            return;
+        }
+
+        const productInfo = createProductInfo(selectedSpec, selectedQuantity);
+
+        let cart = getLocalStorage('cart');
+
+        // 检查购物车中是否已存在相同规格的商品
+        const existingProductIndex = cart.findIndex(item => item.spec === productInfo.spec);
+        if (existingProductIndex > -1) {
+            cart[existingProductIndex].quantity += productInfo.quantity;  // 更新数量
+        } else {
+            cart.push(productInfo);  // 新商品
+        }
+
+        updateLocalStorage('cart', cart);
+
+        alert('商品已加入购物车');
+    });
+
+    // 加入收藏
+    document.getElementById('add-to-collect').addEventListener('click', function () {
+        if (!selectedSpec) {
+            alert('请选择规格！');
+            return;
+        }
+
+        const product = createProductInfo(selectedSpec, selectedQuantity);
+
+        // 获取现有的收藏商品列表，并添加新商品
+        let collectItems = getLocalStorage('collect');
+        collectItems.push(product);
+
+        updateLocalStorage('collect', collectItems);
+
+        alert('商品已收藏！');
+    });
+});
+
+              </script>
+          <a href="javascript:" id="add-to-collect">收藏</a>
+          </div>
+        </div>
+  
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="m-promContainer center">
+    <div class="w-promHd">
+      <h3>你可能还喜欢</h3>
+    </div>
+    <div class="promList">
+      <ul>
+        <li>
+          <div class="hd">
+            <a href="#">
+              <img class="img_scale" src="./images/商品详情/可能喜欢1.png" alt="">
+            </a>
+          </div>
+          <div class="bd">
+            <div class="tags">每日抄底</div>
+            <h4 class="name">广东台山广海咸鱼一夜埕马胶鱼淡口咸鱼干海味干货特产</h4>
+            <div class="price">
+              <span>¥46.9</span>
+              <a href="#">购买</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="hd">
+            <a href="#">
+              <img class="img_scale" src="./images/商品详情/可能喜欢2.png" alt="">
+            </a>
+          </div>
+          <div class="bd">
+            <div class="tags">每日抄底</div>
+            <h4 class="name">去头三牙鱼干 三齿鱼台山特产广海小咸鱼 </h4>
+            <div class="price">
+              <span>¥28.99</span>
+              <a href="#">购买</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="hd">
+            <a href="#">
+              <img class="img_scale" src="./images/商品详情/可能喜欢3.png" alt="">
+            </a>
+          </div>
+          <div class="bd">
+            <div class="tags">每日抄底</div>
+            <h4 class="name">广东咸鱼淡晒金鲳鱼干一夜埕咸鲜金仓鱼干</h4>
+            <div class="price">
+              <span>¥45.1</span>
+              <a href="#">购买</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="hd">
+            <a href="#">
+              <img class="img_scale" src="./images/商品详情/可能喜欢4.png" alt="">
+            </a>
+          </div>
+          <div class="bd">
+            <div class="tags">每日抄底</div>
+            <h4 class="name">台山特产 广东梅香咸鱼 海中玉梅香马鲛鱼 霉香马交 鱼香茄子</h4>
+            <div class="price">
+              <span>¥48.44</span>
+              <a href="#">购买</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+  
+      </div>
+    </div>
+  </div>
+
+  <!-- 商品详情 -->
+  <div class="detailBd">
+    <div class="center">
+      <div class="left">
+        <div class="detailNavTab">
+          <ul>
+            <li>详情</li>
+            <li>评价</li>
+            <li>常见问题</li>
+            </li>
+          </ul>
+        </div>
+        <div class="tabContent">
+          <ul>
+            <li>
+              <span>包装方式</span>
+              <span>包装</span>
+              <span>种类</span>
+              <span>海产干货</span>
+            </li>
+            <li>
+              <span>产地</span>
+              <span>广东台山</span>
+              <span>保质期</span>
+              <span>540天</span>
+            </li>
+            <li>
+              <span>适用场景</span>
+              <span>家用</span>
+              <span></span>
+              <span></span>
+            </li>
+            <li>
+              <span>贮藏方法</span>
+              <span>请置于阴凉干燥处，密封保存</span>
+              <span>配料</span>
+              <span>海银虾、食 用盐、食用水</span></span>
+            </li>
+            <li>
+              <span>温馨提示</span>
+              <span>五邑臻选出售的食品，除明确质量问题外均不接受退换货</span>
+              <span></span>
+              <span></span>
+            </li>
+          </ul>
+          <div class="img">
+            <div class="img">
+              <p><img src="./images/商品详情/梅香咸虾底1.png" alt=""></p>
+              <p><img src="./images/商品详情/梅香咸虾底2.png" alt=""></p>
+              <p><img src="./images/商品详情/梅香咸虾底3.png" alt=""></p>
+              <p><img src="./images/商品详情/梅香咸虾底4.png" alt=""></p>
+            </div>
+
+        </div>
+      </div>
+      <div class="right">
+        <header>24小时热销榜</header>
+        <div class="bd">
+          <ul>
+            <li>
+              <div class="hd-img">
+                <a href="./陈皮李饼.html"><img src="./images/商品详情/热1.png" alt=""></a>
+              </div>
+              <div class="bd-content">
+                <a href="./陈皮李饼.html" class="name">陈皮李饼398g新会特产话梅零食蜜饯果脯办公室休闲食品 </a>
+                <span class="price">¥26.8</span>
+              </div>
+            </li>
+            <li>
+              <div class="hd-img">
+                <a href="./梅香咸虾.html"><img src="./images/商品详情/热2.png" alt=""></a>
+              </div>
+              <div class="bd-content">
+                <a href="./梅香咸虾.html" class="name">台山川岛特产手工晒酶香虾酱梅香咸虾咸玛海鲜酱调味料虾膏酱228g</a>
+                <span class="price">¥12.8</span>
+              </div>
+            </li>
+            <li>
+              <div class="hd-img">
+                <a href="./开平荞头.html"><img src="./images/商品详情/热3.png" alt=""></a>
+              </div>
+              <div class="bd-content">
+                <a href="./开平荞头.html" class="name">甜酸荞头开平特产教头腌制糖醋藠头餐前小吃酸辣茭头开胃解腻泡菜 </a>
+                <span class="price">¥33.8</span>
+              </div>
+            </li>
+            <li>
+              <div class="hd-img">
+                <a href="./鹤山腊肠.html"><img src="./images/商品详情/热4 .png" alt=""></a>
+              </div>
+              <div class="bd-content">
+                <a href="./鹤山腊肠.html" class="name">鹤山址山腊味肉肠生晒传统工艺家乡味道广式煲仔饭</a>
+                <span class="price">¥46.8</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>/* 确保图片容器设置为相对定位，方便做浮动效果 */
+    .hd-img {
+      position: relative;
+      overflow: hidden; /* 避免图片浮动时超出容器 */
+    }
+    
+    /* 图片悬浮时的效果 */
+    .hd-img img {
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* 设置平滑过渡 */
+      width: 100%; /* 使图片宽度自适应 */
+      height: auto; /* 保持图片比例 */
+    }
+    
+    /* 鼠标悬浮时，图片放大并且有阴影效果 */
+    .hd-img:hover img {
+      transform: scale(1.1); /* 放大10% */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    }
+    </style>
+<!-- 评论区 -->
+<div id="comments-section" class="comments-section">
+  <header>商品评价</header>
+  <div class="comments-list">
+      <!-- 示例评论 -->
+      <div class="comment">
+          <div class="user-info">
+              <span class="username">小小</span>
+              <span class="comment-time">2024-12-20 16:30</span>
+          </div>
+          <p class="comment-content">回购的，快递漏单了，找客服二话不说补发了，赞</p>
+     
+      </div>
+      <div class="comment">
+          <div class="user-info">
+              <span class="username">小陈</span>
+              <span class="comment-time">2024-12-21 10:15</span>
+          </div>
+          <p class="comment-content">虾醬很看、真材實料</p>
+          <div class="comment-images">
+            <img src="./images/商品详情/梅香咸虾评论1.png" alt="图片2" />
+        </div>
+      </div>
+  </div>
+  
+  <!-- 评论输入框和提交按钮 -->
+  <div class="comment-form">
+      <textarea id="comment-input" placeholder="请输入您的评论..."></textarea>
+      <input type="file" id="comment-image" accept="image/*" multiple />
+      <button id="submit-comment">发表评论</button>
+  </div>
+</div>
+
+
+  <!-- 底部 -->
+  <footer>
+    <div class="center">
+      <div class="yx-cp-m-ft1">
+        <div class="yx-cp-item">
+          <h4>客服服务</h4>
+          <div class="btn">
+            <a>
+              <i></i>
+              <span>在线客服</span>
+            </a>
+            <a>
+              <i></i>
+              <span>用户反馈</span>
+            </a>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>何为五邑臻选</h4>
+          <p>
+            五邑臻选”通常指的是来自中国广东省珠江三角洲五邑地区的特色优质产品。这些产品经过严格筛选，代表了五邑地区的特色和优势。
+            五邑地区包括 江门市 及其周边的五个主要区域：新会、台山 、 开平、恩平和鹤山，这个区域有着丰富的文化和自然资源，生产了许多在广东乃至全国都具有知名度的特色产品
+          </p>
+          <div class="ewm">
+            <span>关注我们 :</span>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>关注微信公众号“五邑臻选”</h4>
+          <div><a><img src="./images/二维码.png" alt="" style="width: 150px; height: auto;"></a></div>
+          <p>每日最新资讯</p>
+      </div>
+      
+      
+      </div>
+      <div class="yx-cp-m-ft2"></div>
+    </div>
+  </footer>
+
+  <script src="./js/detail.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/order.js"></script>
+
+  
+
+  <script>
+    // 打开收货地址弹窗
+    function openAddressPopup() {
+        document.getElementById("address-popup").style.display = "block";
+    }
+    
+    // 关闭收货地址弹窗
+    function closeAddressPopup() {
+        document.getElementById("address-popup").style.display = "none";
+    }
+    
+    // 处理地址表单提交
+    document.getElementById("address-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // 获取表单数据
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        
+        // 创建地址对象
+        const newAddress = {
+            name: name,
+            phone: phone,
+            address: address
+        };
+        
+        // 获取当前保存的地址列表
+        let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+        
+        // 将新地址添加到地址列表中
+        addressList.push(newAddress);
+        
+        // 更新 localStorage
+        localStorage.setItem("addresses", JSON.stringify(addressList));
+        
+        // 渲染地址列表
+        renderAddressList();
+        
+        // 清空表单
+        document.getElementById("address-form").reset();
+    });
+    
+    // 渲染地址列表
+    function renderAddressList() {
+        const addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+        const addressListContainer = document.getElementById("address-list");
+        addressListContainer.innerHTML = "";  // 清空当前列表
+        
+        addressList.forEach((address, index) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("address-item");
+            listItem.innerHTML = `
+                <label>
+                    <input type="radio" name="default-address"> ${address.name} (${address.phone}) - ${address.address}
+                </label>
+                <button onclick="deleteAddress(${index})">删除</button>
+            `;
+            
+            addressListContainer.appendChild(listItem);
+        });
+    }
+    // 页面加载时渲染地址列表
+window.addEventListener('DOMContentLoaded', function() {
+    renderAddressList();
+});
+
+    // 删除地址
+    function deleteAddress(index) {
+        // 获取当前保存的地址列表
+        let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+        
+        // 删除指定索引的地址
+        addressList.splice(index, 1);
+        
+        // 更新 localStorage
+        localStorage.setItem("addresses", JSON.stringify(addressList));
+        
+        // 渲染更新后的地址列表
+        renderAddressList();
+    }
+    
+    // 页面加载时加载存储的地址列表
+    window.onload = function() {
+        renderAddressList();
+    };
+    
+        </script>
+
+<script>
+  // 从sessionStorage加载评论
+window.onload = function() {
+ var storedComments = JSON.parse(sessionStorage.getItem('comments'));
+ if (storedComments && storedComments.length > 0) {
+     storedComments.forEach(function(comment) {
+         addCommentToPage(comment.username, comment.time, comment.content, comment.images);
+     });
+ }
+};
+
+// 处理发表评论的功能
+document.getElementById("submit-comment").addEventListener("click", function() {
+ var commentContent = document.getElementById("comment-input").value;
+ var imageFiles = document.getElementById("comment-image").files;
+ 
+ if (commentContent.trim() !== "") {
+     // 获取当前时间
+     var currentTime = new Date().toLocaleString();
+
+     // 处理图片文件
+     var images = [];
+     if (imageFiles.length > 0) {
+         for (let i = 0; i < imageFiles.length; i++) {
+             var fileReader = new FileReader();
+             fileReader.onload = function(e) {
+                 images.push(e.target.result); // 获取图片的base64数据
+                 // 当所有图片加载完成后，保存评论
+                 if (images.length === imageFiles.length) {
+                     saveComment(commentContent, images, currentTime);
+                 }
+             };
+             fileReader.readAsDataURL(imageFiles[i]); // 将图片转为base64
+         }
+     } else {
+         // 如果没有图片，直接保存评论
+         saveComment(commentContent, images, currentTime);
+     }
+ } else {
+     alert("请输入评论内容！");
+ }
+});
+
+// 保存评论到sessionStorage
+function saveComment(content, images, time) {
+ var newComment = {
+     username: "匿名用户",
+     time: time,
+     content: content,
+     images: images
+ };
+ 
+ // 获取现有的评论
+ var comments = JSON.parse(sessionStorage.getItem('comments')) || [];
+ comments.push(newComment);
+ 
+ // 保存评论到sessionStorage
+ sessionStorage.setItem('comments', JSON.stringify(comments));
+ 
+ // 将评论添加到页面
+ addCommentToPage(newComment.username, newComment.time, newComment.content, newComment.images);
+
+ // 清空输入框和图片选择框
+ document.getElementById("comment-input").value = "";
+ document.getElementById("comment-image").value = "";
+}
+
+// 将评论添加到页面
+function addCommentToPage(username, time, content, images) {
+ var commentSection = document.querySelector(".comments-list");
+
+ var commentElement = document.createElement("div");
+ commentElement.classList.add("comment");
+
+ var imageHTML = "";
+ images.forEach(function(image) {
+     imageHTML += `<img src="${image}" alt="评论图片" />`;
+ });
+
+ commentElement.innerHTML = `
+     <div class="user-info">
+         <span class="username">${username}</span>
+         <span class="comment-time">${time}</span>
+     </div>
+     <p class="comment-content">${content}</p>
+     <div class="comment-images">
+         ${imageHTML}
+     </div>
+ `;
+
+ commentSection.appendChild(commentElement);
+}
+</script>
+
+</body>
+
+
+</html>

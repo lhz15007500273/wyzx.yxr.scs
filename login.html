@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="五邑严选,严选,五邑优选,五邑甄选,五邑优品,五邑精选,甄选家,严选态度" />
+  <meta name="description" content="五邑严选秉承五邑一贯的严谨态度，深入世界各地，严格把关所有商品的产地、工艺、原材料，甄选居家、厨房、饮食等各类商品，力求给你最优质的商品。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五邑严选 - 以严谨的态度，为中国消费者甄选天下优品</title>
+  <link rel="shortcut icon" href="./images/logo2.png" type="image/x-icon" />
+  <!-- 公共样式CSS -->
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- 登录样式 -->
+  <link rel="stylesheet" href="./css/login.css">
+</head>
+<style>
+  .a {
+      position: relative;
+      top: 25px;
+      width: 1100px;
+      height: 550px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .8);
+      display: flex;
+  }
+  
+  .b {
+            width: 1200px;
+            height: 550px;
+            background-image: url("./images/login背景.jpg");
+            /* 让图片适应大小 */
+            background-size: cover;
+        }
+        .c {
+    width: 585px;
+    height: 529px;
+    background-color: white;
+    display: flex;
+    flex-direction: column; /* 使内容垂直排列 */
+    justify-content: flex-start; /* 内容从顶部开始排列 */
+    align-items: center;
+    padding-top: 20px; /* 给顶部留一点空隙 */
+}
+
+.login-header {
+    width: 100%;
+    height: 60px; /* 调整高度，适应文字大小 */
+    text-align: center;
+    line-height: 175px; /* 使文字垂直居中 */
+    margin-bottom: 70px; /* 控制顶部文字和输入框的间距 */
+}
+
+
+
+#login, #regedit {
+    color: #b4a078;
+    font-size: 40px; /* 可以根据需要调整字体大小 */
+    cursor: pointer;
+    margin: 0 10px; /* 调整左右间距 */
+}
+
+
+
+
+.btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./images/bj.png');
+}
+  </style>
+<body>
+  <!-- 头部  公共的 -->
+  <header id="header">
+<!-- 头,顶部 start -->
+<div class="header">
+  <div class="center">
+    <div class="left">
+      <a href="./announcement.html">
+        因事件（台风、特大暴雨）影响，部分地区无法配送公告
+      </a>
+    </div>
+    <div class="right">
+      <ul>
+        <div class="right">
+          
+      </div>
+  </div>
+      
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- 头,顶部 end -->
+    <div class="search">
+      <div class="center">
+        <div class="logo">
+          <a >五邑严选</a>
+        </div>
+      </div>
+    </div>
+    <!-- 头, 搜索区域 end -->
+
+  </header>
+
+<!-- 登录与注册界面 -->
+<div class="login">
+  <div class="bg">
+    <div class="g-row center">
+      <div class="a">
+        <div class="b"></div>
+          <div class="c" id="login_register">
+        
+        <!-- 登录与注册切换 -->
+        <div class="login-header">
+          <span id="login" class="current">登录</span>
+          <strong>|</strong>
+          <span id="regedit">注册</span>
+        </div>
+        
+        <!-- 登录表单 -->
+        <form id="loginForm">
+          <div class="inputbox">
+            <div class="logo">
+              <img src="./images/phone.png" alt="">
+            </div>
+            <input type="text" placeholder="请输入账号" autocomplete="off" maxlength="11" id="phone" name="phone">
+            <span class="phoneMsg"></span>
+          </div>
+          
+          <div class="inputbox">
+            <div class="logo">
+              <img src="./images/phone.png" alt="">
+            </div>
+            <input type="password" placeholder="请输入密码" autocomplete="off" id="pwd" name="pwd">
+            <span class="pwdMsg"></span>
+          </div>
+        
+          <div class="btn">
+            <button id="submitLogin">登录</button>
+          </div>
+        </form>
+        
+        <!-- 注册表单 -->
+        <form id="registerForm" style="display: none;">
+          <div class="inputbox">
+            <div class="logo">
+              <img src="./images/phone.png" alt="">
+            </div>
+            <input type="text" placeholder="请输入账号" autocomplete="off" maxlength="11" id="regPhone" name="regPhone">
+            <span class="phoneMsg"></span>
+          </div>
+          
+          <div class="inputbox">
+            <div class="logo">
+              <img src="./images/phone.png" alt="">
+            </div>
+            <input type="password" placeholder="请输入密码" autocomplete="off" id="regPwd" name="regPwd">
+            <span class="pwdMsg"></span>
+          </div>
+          
+          <div class="inputbox">
+            <div class="logo">
+              <img src="./images/phone.png" alt="">
+            </div>
+            <input type="password" placeholder="确认密码" autocomplete="off" id="confirmPwd" name="confirmPwd">
+            <span class="confirmMsg"></span>
+          </div>
+          
+          <div class="btn">
+            <button id="submitRegister">注册</button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+      
+
+<script src="./js/login.js"></script>
+    
+    
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="五邑臻选,严选,五邑优选,五邑甄选,五邑优品,五邑精选,甄选家,严选态度" />
+  <meta name="description" content="五邑臻选秉承五邑一贯的严谨态度，深入世界各地，严格把关所有商品的产地、工艺、原材料，甄选居家、厨房、饮食等各类商品，力求给你最优质的商品。" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五邑臻选 - 以严谨的态度，为中国消费者甄选天下优品</title>
+  <link rel="shortcut icon" href="./images/logo2.png" type="image/x-icon" />
+  <!-- 公共样式CSS -->
+  <link rel="stylesheet" href="./css/common.css">
+  <!-- 首页样式 -->
+  <link rel="stylesheet" href="./css/cart.css">
+  <style>
+
+
+/* 弹出表单 */
+.join-form-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.join-form {
+    background-color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.join-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.join-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.join-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0e578b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.join-form button:hover {
+    background-color: #467393;
+}
+
+.close-btn {
+    position: absolute;
+    top: 214px;
+    right: 574px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* 提交成功提示 */
+.success-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.success-message p {
+    background-color: white;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.success-message button {
+    padding: 0px 5px;
+    margin-top: -45px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    margin-left: -20px;  /* 向左偏移 20px */
+}
+
+.success-message button:hover {
+    background-color: #f20e0e;
+}
+
+/* 基本样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('./images/bj.png');
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* 弹窗背景 */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+/* 弹窗内容 */
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* 地址列表 */
+#address-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.address-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.address-item input {
+    margin-right: 10px;
+}
+
+.address-item button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* 修改已添加的地址标题的字体颜色为黑色 */
+label {
+    color: black;
+}
+
+/* 表单的布局样式 */
+form {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* 每个表单元素都分行显示 */
+form label, form input, form textarea, form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    width: auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 地址列表项的样式 */
+.address-item input {
+    margin-right: 10px;
+}
+
+
+  </style>
+</head>
+
+<body>
+ <!-- 头部 -->
+ <header id="header">
+  <!-- 头部  公共的 -->
+<header id="header">
+<!-- 头,顶部 start -->
+<div class="header">
+  <div class="center">
+    <div class="left">
+      <a href="./announcement.html">
+        因事件（台风、特大暴雨）影响，部分地区无法配送公告
+      </a>
+    </div>
+    <div class="right">
+      <ul>
+        <li id="isLogin">
+          <!-- 登录状态将在此处动态显示 -->
+        </li>
+                
+        <li><a href="./order.html" target="_blank">我的订单</a></li>
+        <li><a href="./vip.html" target="_blank">会员</a></li>
+        <li class="dropMeun">
+          <li><a href="javascript:void(0)" onclick="openAddressPopup()">收货信息</a></li>
+           <!-- 弹窗 -->
+    <div id="address-popup" class="popup">
+      <div class="popup-content">
+          <span class="close-btn" onclick="closeAddressPopup()">&times;</span>
+          <h3>填写收货信息</h3>
+          
+          <!-- 填写地址表单 -->
+          <form id="address-form">
+              <label for="name">姓名：</label>
+              <input type="text" id="name" name="name" required>
+              
+              <label for="phone">手机号码：</label>
+              <input type="tel" id="phone" name="phone" required>
+              
+              <label for="address">详细地址：</label>
+              <textarea id="address" name="address" required></textarea>
+              
+              <button type="submit">添加地址</button>
+          </form>
+
+          <hr>
+          <h3>已添加的地址：</h3>
+          <ul id="address-list">
+              <!-- 动态生成地址列表 -->
+          </ul>
+      </div>
+  </div>
+        <li class="dropMeun">
+          <a href="javascript:void(0)" class="iconfont">客户服务</a>
+          <ul>
+            <li><a href="javascript:void(0)" id="openChatLink">在线客服</a></li>
+            <li><a href="./cooperation.html">商务合作</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+ <!-- 客服聊天框 -->
+ <div id="chatbox" class="chatbox">
+  <div class="chatbox-header">
+      <h4>在线客服</h4>
+      <button id="closeChat" class="close-chat-btn">×</button>
+  </div>
+  <div id="chatbox-messages" class="chatbox-messages">
+      <!-- 消息内容 -->
+  </div>
+  <div class="chatbox-input">
+      <input type="text" id="userMessage" placeholder="请输入您的问题..." />
+      <button id="sendMessage" class="send-btn">发送</button>
+  </div>
+</div>
+<style>/* 客服聊天框样式 */
+  .chatbox {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 300px;
+      height: 400px;
+      border: 1px solid #ccc;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none; /* 初始状态隐藏 */
+      flex-direction: column;
+  }
+  
+  .chatbox-header {
+      background-color: #0e578b;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .chatbox-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+      border-bottom: 1px solid #ccc;
+  }
+  
+  .chatbox-input {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+  }
+  
+  .chatbox-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+  }
+  
+  .chatbox-input button {
+      background-color: #0e578b;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+  
+  .chatbox-input button:hover {
+      background-color: #467393;
+  }
+  
+  .close-chat-btn {
+      background: none;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+  }
+
+  /* 消息样式 */
+.chatbox .message {
+margin-bottom: 10px;
+}
+
+.chatbox .message strong {
+color: #0e578b;
+}
+
+.chatbox .message:nth-child(odd) {
+background-color: #f0f8ff;
+padding: 5px;
+border-radius: 5px;
+}
+
+.chatbox .message:nth-child(even) {
+background-color: #e5e5e5;
+padding: 5px;
+border-radius: 5px;
+}
+
+/* 用户消息 */
+.chatbox .message:first-child {
+text-align: left;
+}
+
+/* 客服消息 */
+.chatbox .message:last-child {
+text-align: right;
+}
+
+  </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+const chatbox = document.getElementById('chatbox');
+const closeChat = document.getElementById('closeChat');
+const sendMessageBtn = document.getElementById('sendMessage');
+const userMessageInput = document.getElementById('userMessage');
+const chatboxMessages = document.getElementById('chatbox-messages');
+const openChatLink = document.getElementById('openChatLink');  // 获取"在线客服"链接
+
+// 打开聊天框
+function openChatbox() {
+  chatbox.style.display = 'flex';
+}
+
+// 关闭聊天框
+closeChat.addEventListener('click', function () {
+  chatbox.style.display = 'none';
+});
+
+// 发送消息
+sendMessageBtn.addEventListener('click', function () {
+  const userMessage = userMessageInput.value.trim();
+  if (userMessage) {
+    // 显示用户的消息
+    addMessageToChatbox('用户', userMessage);
+
+    // 清空输入框
+    userMessageInput.value = '';
+
+    // 模拟客服回复
+    simulateCustomerServiceReply(userMessage);
+  }
+});
+
+// 向聊天框中添加消息
+function addMessageToChatbox(sender, message) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message');
+  messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  chatboxMessages.appendChild(messageElement);
+
+  // 自动滚动到底部
+  chatboxMessages.scrollTop = chatboxMessages.scrollHeight;
+}
+
+// 模拟客服回复的函数
+function simulateCustomerServiceReply(userMessage) {
+  let fixedReply = ''; // 默认的客服回复
+
+  // 根据用户输入的内容做不同的判断
+  if (userMessage.includes('你好') || userMessage.includes('您好')) {
+    fixedReply = '您好！欢迎来到五邑臻选。有什么我可以帮助您的吗？';
+  } else if (userMessage.includes('商品') || userMessage.includes('价格')) {
+    fixedReply = '您可以通过我们的产品分类来查看所有商品，或者直接告诉我您想要的商品名称。';
+  } else if (userMessage.includes('退货') || userMessage.includes('退款')) {
+    fixedReply = '如果您需要退货或退款，请提供订单号，我会帮您处理。';
+  } else if (userMessage.includes('物流') || userMessage.includes('快递')) {
+    fixedReply = '请提供您的订单号，我会帮您查询物流信息。';
+  } else if (userMessage.includes('优惠') || userMessage.includes('折扣')) {
+    fixedReply = '我们目前有一些促销活动，您可以查看“限时折扣”板块，享受优惠价格。';
+  } else {
+    fixedReply = '您好！感谢您的提问。我们已经收到您的问题，会尽快处理。';
+  }
+
+  // 模拟客服回复（延迟1秒）
+  setTimeout(function () {
+    addMessageToChatbox('客服', fixedReply);
+  }, 1000);
+}
+
+// 点击"在线客服"链接时打开聊天框
+openChatLink.addEventListener('click', function () {
+  openChatbox();
+});
+});
+</script>
+<!-- 头,顶部 end -->
+
+  <!-- 头, 搜索区域 start -->
+  <div class="search">
+    <div class="center">
+      <div class="logo">
+        <a href="#">五邑臻选</a>
+      </div>
+    </header>
+
+    <div class="word">
+      <p>欢迎访问我们的商务合作页面</p>
+    </div>
+    
+    <div class="content">
+
+    
+      <h3>我们的团队</h3>
+      
+      <div class="team-member">
+        <h4>黄钰珊（董事长/总经理）</h4>
+        <p>黄钰珊女士是公司的最高领导，全面负责公司的战略规划与重要决策。在她的领导下，公司在电商领域取得了显著的成就，并始终坚持创新和持续发展的核心理念，推动公司向着更广阔的市场迈进。</p>
+      </div>
+    
+      <div class="team-member">
+        <h4>李浩臻（技术部经理/运营部经理）</h4>
+        <p>作为技术与运营的核心负责人，李浩臻先生主导平台的技术架构优化和运营效率提升。他带领团队不断进行技术创新，优化平台用户体验，确保电商平台能够在激烈的市场竞争中保持领先地位。</p>
+      </div>
+    
+      <div class="team-member">
+        <h4>江佩雅（财务部经理/营销部经理）</h4>
+        <p>作为财务和营销的双重负责人，江佩雅女士精通财务管理和市场营销策略。她不仅确保平台的财务健康，还主导了多个成功的营销活动，帮助平台和合作伙伴实现品牌曝光和市场份额的增长。</p>
+      </div>
+    
+      <div class="team-member">
+        <h4>黎美霞（法律顾问）</h4>
+        <p>黎美霞女士作为公司的首席法务官，负责公司所有的法律事务与合规问题。她确保公司的运营符合法律法规，同时为合作伙伴提供专业的法律咨询，保障合作双方的合法权益。</p>
+      </div>
+    
+      <h3>合作领域</h3>
+    
+      <div class="cooperation">
+        <p><strong>战略合作</strong>: 我们欢迎与电商、科技、零售等行业的企业建立战略合作伙伴关系，共同推动行业创新和市场扩展。</p>
+        <p><strong>技术合作</strong>: 我们拥有领先的电商技术平台，致力于为合作伙伴提供最先进的技术支持和开发能力。无论您需要系统集成、数据分析、人工智能技术，还是平台定制化开发，我们都能提供最佳解决方案。</p>
+        <p><strong>市场营销合作</strong>: 我们为合作伙伴提供全面的市场营销支持，包括品牌推广、广告投放、用户增长策略等。通过精准的市场定位和创新的营销手段，帮助您实现品牌的快速崛起和市场份额的提升。</p>
+        <p><strong>供应链与物流合作</strong>: 我们拥有强大的供应链管理能力和全球化物流网络，能为合作伙伴提供高效的商品配送解决方案。与我们合作，您可以优化您的库存管理、提高配送效率，并为终端客户提供更好的购物体验。</p>
+        <p><strong>跨境电商合作</strong>: 作为国际化电商平台，我们提供丰富的跨境电商合作机会，帮助品牌商和零售商拓展海外市场，实现全球电商生态中的合作共赢。</p>
+        <p><strong>财务与合规咨询</strong>: 我们的专业团队将帮助您优化财务结构，并提供税务筹划、合规审查等方面的咨询，确保您的电商运营在不同市场和地区符合相关法律法规，避免风险，稳步增长。</p>
+      </div>
+    
+      <h3>联系我们</h3>
+    
+      <div class="contact">
+        <p><strong>黄钰珊（董事长/总经理）</strong><br>电话：13286180901<br>邮箱：13286180901@163.com</p>
+        <p><strong>李浩臻（技术部经理/运营部经理）</strong><br>电话：15007500273<br>邮箱：2138908430@qq.com</p>
+        <p><strong>江佩雅（财务部经理/营销部经理）</strong><br>电话：17718861039<br>邮箱：2984989980@qq.com</p>
+        <p><strong>黎美霞（法律顾问）</strong><br>电话：18320042403<br>邮箱：3340551874@qq.com</p>
+      </div>
+    
+      <p>感谢您对我们的关注与支持，我们期待与您携手合作，共同开创更加辉煌的未来！</p>
+    </div>
+    
+    <style>
+    /* 设置 .word div 样式 */
+    .word {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 120px;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .word p {
+      font-size: 50px;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+      margin: 0;
+    }
+    
+    /* 统一内容样式 */
+    .content p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: center;  /* 使所有段落居中 */
+    }
+    
+    /* 标题样式 */
+    .content h2, .content h3, .content h4 {
+      font-size: 24px;
+      color: #000;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;  /* 居中标题 */
+    }
+    
+    /* 卡片样式：团队成员、合作领域等 */
+    .team-member, .cooperation, .contact {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+      max-width: 800px;  /* 限制最大宽度 */
+      margin-left: auto; /* 居中 */
+      margin-right: auto; /* 居中 */
+    }
+    
+    .team-member:hover, .cooperation:hover, .contact:hover {
+      transform: translateY(-10px);
+    }
+    
+    .team-member h4, .contact p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .contact p {
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .cooperation p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.8;
+    }
+    
+    /* 添加响应式设计 */
+    @media (max-width: 768px) {
+      .content {
+        padding: 10px;
+      }
+    
+      .team-member, .cooperation, .contact {
+        padding: 15px;
+      }
+    
+      .word {
+        padding: 15px;
+      }
+    
+      .word p {
+        font-size: 20px;
+      }
+    }
+    </style>
+    
+
+   <!-- 底部 -->
+   <footer>
+    <div class="center">
+      <div class="yx-cp-m-ft1">
+        <div class="yx-cp-item">
+          <h4>客服服务</h4>
+          <div class="btn">
+            <a>
+              <i></i>
+              <span>在线客服</span>
+            </a>
+            <a>
+              <i></i>
+              <span>用户反馈</span>
+            </a>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>何为五邑臻选</h4>
+          <p>
+            五邑臻选”通常指的是来自中国广东省珠江三角洲五邑地区的特色优质产品。这些产品经过严格筛选，代表了五邑地区的特色和优势。
+            五邑地区包括 江门市 及其周边的五个主要区域：新会、台山 、 开平、恩平和鹤山，这个区域有着丰富的文化和自然资源，生产了许多在广东乃至全国都具有知名度的特色产品
+          </p>
+          <div class="ewm">
+            <span>关注我们 :</span>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+        </div>
+        <div class="yx-cp-item">
+          <h4>关注微信公众号“五邑臻选”</h4>
+          <div><a><img src="./images/二维码.png" alt="" style="width: 150px; height: auto;"></a></div>
+          <p>每日最新资讯</p>
+      </div>
+      
+      
+      </div>
+      <div class="yx-cp-m-ft2"></div>
+    </div>
+  </footer>
+
+  <script src="./js/common.js"></script>
+
+  
+
+    
+
+<script>
+  // 打开收货地址弹窗
+  function openAddressPopup() {
+      document.getElementById("address-popup").style.display = "block";
+  }
+  
+  // 关闭收货地址弹窗
+  function closeAddressPopup() {
+      document.getElementById("address-popup").style.display = "none";
+  }
+  
+  // 处理地址表单提交
+  document.getElementById("address-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      // 获取表单数据
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      
+      // 创建地址对象
+      const newAddress = {
+          name: name,
+          phone: phone,
+          address: address
+      };
+      
+      // 获取当前保存的地址列表
+      let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+      
+      // 将新地址添加到地址列表中
+      addressList.push(newAddress);
+      
+      // 更新 localStorage
+      localStorage.setItem("addresses", JSON.stringify(addressList));
+      
+      // 渲染地址列表
+      renderAddressList();
+      
+      // 清空表单
+      document.getElementById("address-form").reset();
+  });
+  
+  // 渲染地址列表
+  function renderAddressList() {
+      const addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+      const addressListContainer = document.getElementById("address-list");
+      addressListContainer.innerHTML = "";  // 清空当前列表
+      
+      addressList.forEach((address, index) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("address-item");
+          listItem.innerHTML = `
+              <label>
+                  <input type="radio" name="default-address"> ${address.name} (${address.phone}) - ${address.address}
+              </label>
+              <button onclick="deleteAddress(${index})">删除</button>
+          `;
+          
+          addressListContainer.appendChild(listItem);
+      });
+  }
+  
+  // 删除地址
+  function deleteAddress(index) {
+      // 获取当前保存的地址列表
+      let addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+      
+      // 删除指定索引的地址
+      addressList.splice(index, 1);
+      
+      // 更新 localStorage
+      localStorage.setItem("addresses", JSON.stringify(addressList));
+      
+      // 渲染更新后的地址列表
+      renderAddressList();
+  }
+  
+  // 页面加载时加载存储的地址列表
+  window.onload = function() {
+      renderAddressList();
+  };
+  
+      </script>
+</body>
+
+</html>

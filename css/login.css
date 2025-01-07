@@ -1,0 +1,217 @@
+/* 背景和总体布局 */
+.login .bg {
+  width: 100%;
+  height: 600px;
+  background: url(../images/login_bg.jpg) center no-repeat;
+  background-size: cover;
+}
+
+.login .bg .g-row {
+  position: relative;
+}
+
+.login .bg .g-row .lg-ewm {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.login .bg .g-row .lg-ewm img {
+  display: block;
+  width: 100%;
+}
+
+.login .bg .g-row .lg-sm {
+  position: absolute;
+  width: 97px;
+  height: 19px;
+  top: 10px;
+  left: 60px;
+  cursor: pointer;
+}
+
+.login .bg .g-row .lg-sm img {
+  display: block;
+  width: 100%;
+}
+
+.login .bg .g-row .yx-loginFooter {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background: #F5F3EF;
+  width: 348px;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding-right: 25px;
+}
+
+.login .bg .g-row .yx-loginFooter .oList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.login .bg .g-row .yx-loginFooter .oList a {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  background: url(../images/login_sprites.png) center no-repeat;
+  background-position: -7px -4px;
+}
+
+.login .bg .g-row .yx-loginFooter span {
+  cursor: pointer;
+}
+
+/* 登录区域的样式 */
+.login .bg .g-row {
+  position: relative;  /* 设置父容器为相对定位 */
+  height: 75vh;       /* 父容器的高度设为视口高度 */
+}
+
+
+.login .bg .g-row .login-post .login-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 47;
+  font-size: 18px;
+}
+
+.login .bg .g-row .login-post .login-header #login,
+.login .bg .g-row .login-post .login-header #regedit {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login .bg .g-row .login-post .login-header strong {
+  margin: 0 30px;
+  cursor: default;
+}
+
+/* 输入框容器 */
+.login .bg .g-row .inputbox {
+  margin: 40px auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  height: 40px;
+  border: 1px solid #ccc;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.login .bg .g-row .inputbox .logo {
+  border-right: 1px solid #ccc;
+  padding: 8px;
+}
+
+.login .bg .g-row .inputbox .logo img {
+  width: 18px;
+  height: 18px;
+}
+.login .bg .g-row .inputbox {
+  width: 100%;
+  margin-bottom: 40px; /* 控制输入框之间的垂直间距 */
+}
+
+.login .bg .g-row .inputbox input {
+  text-indent: 10px; /* 输入框内容的左侧缩进 */
+  width: 100%;
+  height: 40px; /* 控制输入框的高度 */
+  outline: none; /* 去掉聚焦时的外框 */
+  border: 1px solid #ccc; /* 添加边框，让输入框更明显 */
+  font-size: 22px; /* 设置字体大小 */
+  box-sizing: border-box; /* 确保内边距和边框不会影响总宽度 */
+  padding: 0 10px; /* 设置左右内边距 */
+}
+
+
+.login .bg .g-row .inputbox .phoneMsg,
+.login .bg .g-row .inputbox .pwdMsg,
+.login .bg .g-row .inputbox .confirmMsg {
+  position: absolute;
+  top: 45px;
+  left: 30px;
+  font-size: 12px;
+  color: red;
+}
+
+/* 按钮样式 */
+.login .bg .g-row .btn {
+  margin-top: 20px;
+}
+
+.login .bg .g-row .btn button {
+  width: 100%;
+  height: 45px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background: #b4a078;
+  font-size: 16px;
+  line-height: 45px;
+  border-radius: 4px;
+  border: none;
+}
+
+.login .bg .g-row .btn button:hover {
+  background: #a18e66;
+}
+
+.login .bg .g-row .btn button:focus {
+  outline: none;
+}
+
+/* 登录与注册切换 */
+#login, #regedit {
+  color: #b4a078;
+  font-size: 24px; /* 适当减小字体大小，使其更加协调 */
+  cursor: pointer;
+  margin: 0 10px; /* 给左右添加适当的间距 */
+  padding: 5px 0;  /* 调节上下内边距，控制高度 */
+}
+
+.login-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px; /* 控制顶部文字和输入框的间距 */
+}
+
+
+#login.current, #regedit.current {
+  color: #333;
+  font-weight: bold;
+}
+
+#login:hover, #regedit:hover {
+  color: #a18e66;
+}
+
+#loginForm, #registerForm {
+  display: block;
+}
+
+#registerForm {
+  display: none; /* 注册表单初始隐藏 */
+}
+
+/* 其他微调 */
+.nav li.hover {
+  background-color: #f0f0f0;
+}
+
