@@ -291,6 +291,16 @@ form button {
     
     }
   
+    .all-box {
+    display: flex; /* 使用 flex 布局 */
+    flex-wrap: wrap; /* 允许元素换行 */
+    padding: 20px; /* 为容器添加内边距 */
+    width: 90%; /* 容器宽度为100% */
+    position: relative; /* 使用相对定位 */
+  
+    left: 90px; /* 向右移动50px */
+    top: 40px; /* 距离顶部100px */
+}
   
   
 </style>
@@ -555,11 +565,12 @@ openChatLink.addEventListener('click', function () {
         <a href="#">五邑臻选</a>
       </div>
       <div class="search-btn">
-        <div class="top">
-          <input type="text" autocomplete="off" maxlength="100">
-          <span>搜索</span>
-          <i></i>
-        </div>
+     <!-- 搜索框部分 -->
+  <div class="top">
+    <input type="text" id="searchInput" placeholder="请输入商品名称" autocomplete="off" maxlength="100">
+    <span id="searchBtn">搜索</span>
+    <i></i>
+  </div>
         <div class="bottom">
           <a href="#">台山咸虾酱</a>
           <a href="#">广合腐乳</a>
@@ -601,200 +612,9 @@ openChatLink.addEventListener('click', function () {
 
     </header>
 
-
-    <body>
-      
-      <div class="all-box">
-      <div class="all">
-        <a href="目标链接地址">
-          <div class="one">
-            <img src="./images/三牙.png" style="float: left;">
-            <div class="text">
-              广海三牙咸鱼<br>礼盒装
-              <div class="shou">收藏上千</div>
-            </div>
-            <div class="jiage">￥29.9</div>
-          </div>
-        </a>
-        
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-         <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-      <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-    <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-      <a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-<a href="目标链接地址">
-  <div class="one">
-    <img src="./images/三牙.png" style="float: left;">
-    <div class="text">
-      广海三牙咸鱼<br>礼盒装
-      <div class="shou">收藏上千</div>
-    </div>
-    <div class="jiage">￥29.9</div>
-  </div>
-</a>
-
-      </div>
-    </div>
+    <!-- 商品列表展示区域 -->
+  <div class="all-box" id="productContainer"></div>
     
-
-  
-  </body>
   
 <!-- 底部 -->
 <footer>
@@ -840,7 +660,7 @@ openChatLink.addEventListener('click', function () {
 </footer>
 
 
-    
+<script src="./js/products.js"></script>
     <script src="./js/common.js"></script>
 <script>
   // 打开收货地址弹窗

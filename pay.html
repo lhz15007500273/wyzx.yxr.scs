@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付页面</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('./images/bj.png'); /* 背景图片 */
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 400px; /* 调整容器宽度 */
+            text-align: center;
+        }
+
+        #showButton {
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #showButton:hover {
+            background-color: #45a049;
+        }
+
+        /* 模态框背景 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* 半透明的背景 */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 模态框内容 */
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: green;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .checkmark {
+            position: absolute;
+            width: 40px;
+            height: 80px;
+            transform: rotate(45deg);
+            top: -10px;
+            left: 18px;
+        }
+
+        .checkmark::before {
+            content: '';
+            position: absolute;
+            height: 5px;
+            width: 20px;
+            background-color: white;
+            top: 37px;
+            left: 11px;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            height: 5px;
+            width: 45px;
+            background-color: white;
+            top: 27px;
+            left: 11px;
+        }
+
+        p {
+            font-size: 24px;
+            color: #4caf50;
+            margin-top: 20px;
+        }
+
+        /* 支付选项区域 */
+        .payment-options {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .payment-option img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .payment-option span {
+            font-size: 18px;
+        }
+
+        /* 单选按钮样式 */
+        .payment-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        #address-list {
+    margin-left: -35px;   /* 设置左侧距离 */
+    margin-right: 50px;  /* 设置右侧距离 */
+    margin-top: 20px;    /* 上边距 */
+    margin-bottom: 20px; /* 下边距 */
+}
+
+
+#address-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#address-select option {
+    padding: 10px;
+    font-size: 14px;
+}
+
+#address-select option.selected {
+    background-color: #4CAF50;  /* 选中的背景色 */
+    color: white;                /* 选中的字体颜色 */
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Address List -->
+<ul id="address-list">收货地址</ul>
+
+        <!-- 支付选项区域 -->
+        <div class="payment-options">
+            <div class="payment-option">
+                <input type="radio" name="paymentMethod" id="wechatPay" value="wechat">
+                <label for="wechatPay">
+                    <img src="./images/微信支付.ico" alt="微信支付">
+                    <span>微信支付</span>
+                </label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" name="paymentMethod" id="alipay" value="alipay">
+                <label for="alipay">
+                    <img src="./images/支付宝.ico" alt="支付宝">
+                    <span>支付宝</span>
+                </label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" name="paymentMethod" id="digitalRMB" value="digitalRMB">
+                <label for="digitalRMB">
+                    <img src="./images/数字人民币.ico" alt="数字人民币">
+                    <span>数字人民币</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- 支付按钮 -->
+        <button id="showButton">立即支付</button>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="checkmark-circle">
+                <div class="checkmark"></div>
+            </div>
+            <p>支付成功</p>
+        </div>
+    </div>
+
+    <script>
+        // 监听支付按钮点击事件
+        document.getElementById('showButton').addEventListener('click', function() {
+            var selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+            if (!selectedPaymentMethod) {
+                alert('请先选择支付方式！');
+                return;
+            }
+
+            var modal = document.getElementById('myModal');
+            modal.style.display = 'flex'; // 使用 flexbox 居中显示模态框
+
+            // 模拟支付成功，2秒后关闭模态框并跳转
+            setTimeout(function() {
+                modal.style.display = 'none'; // 隐藏模态框
+                alert('支付成功！您选择了 ' + selectedPaymentMethod.value);
+                window.history.back();  // 支付完成后跳转到 cart.html 页面
+            }, 2000); // 2秒后隐藏模态框并跳转
+        });
+    </script>
+ <div id="address-list"></div>
+
+    <script>
+        // 渲染地址列表
+        function renderAddressList() {
+            const addressList = JSON.parse(localStorage.getItem("addresses")) || [];
+            const addressListContainer = document.getElementById("address-list");
+            addressListContainer.innerHTML = "";  // 清空当前列表
+
+            // 创建一个容器来包裹标签和选择框
+            const containerElement = document.createElement('div');
+            containerElement.style.display = 'flex';  // 使用flex布局
+            containerElement.style.alignItems = 'center';  // 垂直居中
+
+            // 创建并添加标签“确定收货地址”
+            const labelElement = document.createElement('label');
+            labelElement.textContent = "确定收货地址";
+            labelElement.style.marginRight = '10px';  // 设置标签与选择框的间距
+
+            containerElement.appendChild(labelElement);  // 将标签添加到容器中
+
+            // 创建一个下拉选择框
+            const selectElement = document.createElement('select');
+            selectElement.id = "address-select";  // 设置select的id
+
+            // 遍历地址列表并生成option
+            addressList.forEach((address, index) => {
+                const optionElement = document.createElement('option');
+                optionElement.value = index;
+                optionElement.innerHTML = address.address; // 只显示地址内容
+
+                selectElement.appendChild(optionElement);
+            });
+
+            containerElement.appendChild(selectElement);  // 将选择框添加到容器中
+            addressListContainer.appendChild(containerElement);  // 将整个容器添加到页面中
+        }
+
+        // 页面加载时渲染地址列表
+        window.addEventListener('DOMContentLoaded', function() {
+            renderAddressList();
+        });
+
+        // 页面加载时加载存储的地址列表
+        window.onload = function() {
+            renderAddressList();
+        };
+    </script>
+
+
+
+
+</body>
+</html>

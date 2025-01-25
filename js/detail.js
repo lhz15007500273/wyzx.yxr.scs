@@ -1,46 +1,128 @@
-window.onload = function() {
-  let currentIndex = 0;  // 当前图片的索引
-  const items = document.querySelectorAll('.m-promContainer .promList ul li');  // 获取所有的图片项
-  const totalItems = items.length;  // 获取总图片数
-  const prevButton = document.querySelector('.m-promContainer .promList .prev');  // 上一张按钮
-  const nextButton = document.querySelector('.m-promContainer .promList .next');  // 下一张按钮
-  let autoPlayInterval = null; // 用来存储自动轮播的定时器
+(function () {
+  window.addEventListener('load', () => {
+    // 模拟商品数据
+    const mockData = {
+      name: "台山特产 广海咸鱼 去头三牙鱼干 淡口三齿鱼 划鱼仔 新广隆海产",
+      text_l: "台山正宗 咸香可口",
+      text_f: "查看评价",
+      tag: "限时折扣",
+      tag_time: "距优惠结束3天09时09分",
+      priceNew: "29.9",
+      priceOld: "39.9",
+      fz: "天天免邮Pro会员立享免邮",
+      cx: "打骨折",
+      gwf: "最高返2积分",
+      xz: "特价商品不可与优惠券叠加使用",
+      yf: "满99元免邮",
+      ps: "广东江门",
+      fw: [
+        "五邑臻选自营", 
+        "不支持无忧退换", 
+        "不可用券", 
+        "国内部分地区不可配送"
+      ],
+      gg: [
+        { text: "带头·开背三牙鱼干232克*1包（足干品质 约4条）", price: "29.9" },
+        { text: "无头·开肚三牙鱼干200克*1包（足干品质 约4条）", price: "25.9" }
+      ]
+    };
 
-  // 设置轮播图的初始位置
-  function goToSlide(index) {
-    const offset = -100 * index / 4; // 每次切换4张图片
-    document.querySelector('.m-promContainer .promList ul').style.transform = `translateX(${offset}%)`;
-  }
+    // 渲染商品数据的类
+    class RenderData {
+      constructor(settings = {}) {
+        // 获取到指定的容器
+        this.el = document.querySelector(settings.el);
+        if (!this.el) {
+          console.error('指定的容器未找到！');
+          return;
+        }
+        
+        // 获取需要填充的元素
+        this.name = this.el.querySelector('.intro h2');
+        this.text_l = this.el.querySelector('.intro .text span');
+        this.text_f = this.el.querySelector('.intro .text a');
+        this.tag = this.el.querySelector('.m-limitedPrice .content');
+        this.tag_time = this.el.querySelector('.m-limitedPrice .countdown');
+        this.priceNew = this.el.querySelector('.price span:nth-of-type(2)');
+        this.priceOld = this.el.querySelector('.price span:nth-of-type(3)');
+        this.fz = this.el.querySelector('.price .canClick span:nth-of-type(2)');
+        this.cx = this.el.querySelector('.price .sale span:nth-of-type(2)');
+        this.gwf = this.el.querySelector('.price .m-feedbackBonus span:nth-of-type(2)');
+        this.xz = this.el.querySelector('.price .pointInfo span:nth-of-type(2)');
+        this.yf = this.el.querySelector('.price .freightText a');
+        this.ps = this.el.querySelector('.price .delivery span:nth-of-type(2)');
+        this.fw = this.el.querySelector('.price .policyBox a');
+        this.gg = this.el.querySelector('.specProp ul');  // 规格列表
+        this.selectedSpecText = this.el.querySelector('.selected-spec-text');
+        
+        // 调用渲染方法
+        this.render();
+        this.bindEvents();  // 绑定事件
+      }
 
-  // 自动轮播的功能
-  function startAutoPlay() {
-    autoPlayInterval = setInterval(function() {
-      currentIndex = (currentIndex + 1) % Math.ceil(totalItems / 4);  // 循环播放
-      goToSlide(currentIndex);  // 切换到指定的图片
-    }, 5000); // 每5秒自动切换一组图片
-  }
+      render() {
+        // 将数据渲染到页面元素中
+        this.name.innerText = mockData.name;
+        this.text_l.innerText = mockData.text_l;
+        this.text_f.innerHTML = mockData.text_f + '<i class="iconfont">&#xe621;</i>';
+        this.tag.innerText = mockData.tag;
+        this.tag_time.innerText = mockData.tag_time;
+        this.priceNew.innerText = mockData.priceNew;
+        this.priceOld.innerText = mockData.priceOld;
+        this.fz.innerText = mockData.fz;
+        this.cx.innerText = mockData.cx;
+        this.gwf.innerText = mockData.gwf;
+        this.xz.innerText = mockData.xz;
+        this.yf.innerText = mockData.yf;
+        this.ps.innerText = mockData.ps;
 
-  // 停止自动轮播
-  function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-  }
+        // 渲染配送政策信息
+        this.fw.innerHTML = ` 
+          <span>${mockData.fw[0]}  </span>
+          <span>${mockData.fw[1]} > </span>
+          <span>${mockData.fw[2]} > </span>
+          <span>${mockData.fw[3]}  </span>
+        `;
 
-  // 前一个按钮点击事件
-  prevButton.addEventListener('click', function() {
-    stopAutoPlay(); // 点击时暂停自动播放
-    currentIndex = (currentIndex === 0) ? Math.ceil(totalItems / 4) - 1 : currentIndex - 1; // 如果当前是第一组，切换到最后一组
-    goToSlide(currentIndex);  // 切换到指定的图片
-    startAutoPlay(); // 重新启动自动轮播
+        // 渲染规格为文字（优化：避免重复渲染）
+        this.renderSpecItems(mockData.gg);
+      }
+
+      // 渲染规格项
+      renderSpecItems(specData) {
+        // 清空现有的规格项
+        this.gg.innerHTML = '';
+        
+        // 动态创建并插入规格项
+        specData.forEach(item => {
+          const li = document.createElement('li');
+          li.classList.add('spec-item');
+          li.dataset.spec = item.text;
+          li.textContent = item.text;
+          this.gg.appendChild(li);
+        });
+      }
+
+      // 绑定规格选择事件（使用事件委托）
+      bindEvents() {
+        this.el.addEventListener('click', (e) => {
+          const specItem = e.target.closest('.spec-item');
+          
+          if (specItem) {
+            // 处理规格选择
+            const selectedSpec = specItem.dataset.spec;
+            const specItems = this.el.querySelectorAll('.spec-item');
+            specItems.forEach(i => i.classList.remove('selected')); // 移除所有选中状态
+            specItem.classList.add('selected'); // 添加当前项的选中状态
+            this.selectedSpecText.textContent = selectedSpec; // 更新显示的规格
+          }
+        });
+      }
+    }
+
+    // 初始化并渲染数据
+    new RenderData({
+      el: '.detailHD'
+    });
   });
-
-  // 下一个按钮点击事件
-  nextButton.addEventListener('click', function() {
-    stopAutoPlay(); // 点击时暂停自动播放
-    currentIndex = (currentIndex === Math.ceil(totalItems / 4) - 1) ? 0 : currentIndex + 1; // 如果当前是最后一组，切换到第一组
-    goToSlide(currentIndex);  // 切换到指定的图片
-    startAutoPlay(); // 重新启动自动轮播
-  });
-
-  // 初始化时启动自动轮播
-  startAutoPlay();
-};
+})();

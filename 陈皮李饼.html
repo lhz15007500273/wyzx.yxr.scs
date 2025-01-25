@@ -649,11 +649,12 @@ button:hover {
           <a href="#">五邑臻选</a>
         </div>
         <div class="search-btn">
-          <div class="top">
-            <input type="text" autocomplete="off" maxlength="100">
-            <span>搜索</span>
-            <i></i>
-          </div>
+      <!-- 搜索框部分 -->
+  <div class="top">
+    <input type="text" id="searchInput" placeholder="请输入商品名称" autocomplete="off" maxlength="100">
+    <span id="searchBtn">搜索</span>
+    <i></i>
+  </div>
           <div class="bottom">
             <a href="#">台山咸虾酱</a>
             <a href="#">广合腐乳</a>
@@ -882,9 +883,8 @@ document.addEventListener('DOMContentLoaded', function () {
             quantityInput.value = selectedQuantity;
         }
     });
-
-    // 立即购买
-    document.getElementById('buy-now').addEventListener('click', function () {
+// 立即购买事件监听
+       document.getElementById('buy-now').addEventListener('click', function () {
         if (!selectedSpec) {
             alert('请选择规格');
             return;
@@ -900,6 +900,11 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("订单数据：", orders);  // 检查存储的订单数据
 
         alert('下单成功！');
+
+        // 在下单成功后延迟跳转到支付页面
+        setTimeout(() => {
+            window.location.href = 'pay.html'; // 跳转到支付页面
+        }, 1000); // 延迟 1 秒跳转，确保下单提示先显示
     });
 
     // 加入购物车
@@ -1225,10 +1230,11 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </footer>
 
-  <script src="./js/detail.js"></script>
+  <script src="./js/products.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/order.js"></script>
 
+ 
   
 
   <script>

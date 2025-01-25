@@ -175,7 +175,6 @@ function updateSelectAllCheckboxState() {
   const allSelected = cart.every(item => item.selected); // 如果所有商品都选中，全选框为选中状态
   selectAllCheckbox.checked = allSelected;
 }
-
 // 处理下单
 function handleOrder() {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -192,6 +191,8 @@ function handleOrder() {
   previousOrders.push(...selectedItems); // 将已下单的商品添加到历史订单中
   localStorage.setItem('order', JSON.stringify(previousOrders));
 
+  
+
   // 清空已下单商品，更新购物车
   cart = cart.filter(item => !item.selected);
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -203,7 +204,13 @@ function handleOrder() {
   setTimeout(() => {
     location.reload(); // 刷新页面
   }, 1000); // 延迟 1 秒刷新页面，给用户看到提示的时间
+
+  // 在下单成功后跳转到支付页面
+  setTimeout(() => {
+    window.location.href = 'pay.html'; // 跳转到支付页面
+  }, 1000); // 延迟 1 秒跳转，确保下单提示先显示
 }
+
 
 // 初始化购物车
 function initCart() {
